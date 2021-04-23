@@ -6,90 +6,114 @@
     android:layout_height="match_parent"
     tools:context=".MainActivity">
 
-    <com.google.android.material.appbar.AppBarLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:theme="@style/Theme.GiRiBasicAmplifier.AppBarOverlay">
-
-        <androidx.appcompat.widget.Toolbar
-            android:id="@+id/toolbar"
-            android:layout_width="match_parent"
-            android:layout_height="?attr/actionBarSize"
-            android:background="?attr/colorPrimary"
-            app:popupTheme="@style/Theme.GiRiBasicAmplifier.PopupOverlay" />
-
-    </com.google.android.material.appbar.AppBarLayout>
-
-    <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
-        xmlns:app="http://schemas.android.com/apk/res-auto"
-        xmlns:tools="http://schemas.android.com/tools"
+    <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         tools:context=".MainActivity">
 
-        <com.example.giribasicamplifier.AudioDeviceSpinner
-            android:id="@+id/inputSpinner"
+        <LinearLayout
+            android:id="@+id/linearLayout"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="64dp"
+            android:orientation="horizontal"
+            android:weightSum="3"
             app:layout_constraintTop_toTopOf="parent"
-            tools:layout_editor_absoluteX="0dp"/>
+            tools:layout_editor_absoluteX="16dp">
 
-        <com.example.giribasicamplifier.AudioDeviceSpinner
-            android:id="@+id/outputSpinner"
+            <com.example.giribasicamplifier.AudioDeviceSpinner
+                android:id="@+id/inputSpinner"
+                android:layout_width="0dp"
+                android:layout_height="50dp"
+                android:layout_weight="1"
+                tools:layout_editor_absoluteX="0dp"
+                tools:layout_editor_absoluteY="2dp" />
+
+            <com.example.giribasicamplifier.AudioDeviceSpinner
+                android:id="@+id/outputSpinner"
+                android:layout_width="0dp"
+                android:layout_height="50dp"
+                android:layout_weight="1"
+                tools:layout_editor_absoluteX="373dp"
+                tools:layout_editor_absoluteY="2dp" />
+
+            <RadioGroup
+                android:id="@+id/radioContainer"
+                android:layout_width="0dp"
+                android:layout_height="50dp"
+                android:layout_weight="1"
+                android:orientation="horizontal"
+                android:weightSum="2">
+
+                <RadioButton
+                    android:id="@+id/openSLES"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="OpenSL ES" />
+
+                <RadioButton
+                    android:id="@+id/aaudio"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="AAudio" />
+            </RadioGroup>
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/linearLayout2"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="97dp"
-            app:layout_constraintTop_toTopOf="@+id/inputSpinner"
-            tools:layout_editor_absoluteX="0dp" />
+            android:layout_height="50dp"
+            android:orientation="horizontal"
+            android:weightSum="6"
+            app:layout_constraintTop_toBottomOf="@+id/linearLayout">
 
-        <com.google.android.material.slider.Slider
-            android:id="@+id/gainSlider"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="328dp"
-            android:valueFrom="0.0"
-            android:valueTo="10.0"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="@+id/outputSpinner" />
+            <TextView
+                android:id="@+id/gain"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:fontFamily="@font/cabin"
+                android:gravity="center"
+                android:text="Gain"
+                android:textColor="#673AB7"
+                android:textSize="30sp"
+                android:textStyle="bold" />
 
-        <RadioGroup
-            android:id="@+id/radioContainer"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            app:layout_constraintBottom_toTopOf="@+id/gainSlider"
+            <com.google.android.material.slider.Slider
+                android:id="@+id/gainSlider"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="4"
+                android:valueFrom="0.0"
+                android:valueTo="10.0" />
+
+            <Button
+                android:id="@+id/toggleEffect"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:gravity="center"
+                android:text="START" />
+
+
+        </LinearLayout>
+
+        <androidx.appcompat.widget.AppCompatImageButton
+            android:id="@+id/delayButton"
+            android:layout_width="208dp"
+            android:layout_height="236dp"
+            android:scaleType="fitCenter"
+            android:background="@android:color/transparent"
+            android:tint="@android:color/holo_purple"
+            android:src="@drawable/ic_guitar_pedal"
+            app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.5"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="@+id/outputSpinner">
+            app:layout_constraintTop_toBottomOf="@+id/linearLayout2" />
 
-            <RadioButton
-                android:id="@+id/openSLES"
-                android:layout_width="171dp"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="180dp"
-                android:layout_marginEnd="120dp"
-                android:baselineAligned="false"
-                android:text="OpenSL ES" />
-
-            <RadioButton
-                android:id="@+id/aaudio"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="AAudio" />
-        </RadioGroup>
-
-        <Button
-            android:id="@+id/toggleEffect"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="111dp"
-            android:text="START"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="@+id/gainSlider" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 

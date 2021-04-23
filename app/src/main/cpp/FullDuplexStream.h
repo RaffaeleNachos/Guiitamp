@@ -28,10 +28,15 @@ public:
     FullDuplexStream() {}
     virtual ~FullDuplexStream() = default;
     float gainValue = 1.0;
+    bool delay = false;
     SimpleDelay sf = {8810, 44100};
 
     void setGainValue(float value){
         gainValue = value;
+    }
+
+    void setDelay(bool value){
+        delay = value;
     }
 
     void setInputStream(std::shared_ptr<oboe::AudioStream> stream) {
@@ -58,7 +63,8 @@ public:
             void *outputData,
             int   numOutputFrames,
             float gainValue,
-            SimpleDelay* sf) = 0;
+            SimpleDelay* sf,
+            bool delay) = 0;
 
     /**
      * Called by Oboe when the stream is ready to process audio.

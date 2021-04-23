@@ -1,6 +1,7 @@
 package com.example.giribasicamplifier;
 
 import android.Manifest;
+import android.content.pm.ActivityInfo;
 import android.content.pm.PackageManager;
 import android.media.AudioManager;
 import android.os.Build;
@@ -21,6 +22,7 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.Button;
+import android.widget.ImageButton;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
 import android.widget.Toast;
@@ -38,16 +40,26 @@ public class MainActivity extends AppCompatActivity {
     private boolean mAAudioRecommended = true;
     private boolean isPlaying = false;
     private Button toggleEffectButton;
+    private ImageButton toggleDelayEffect;
     private Slider gainSlider;
     private AudioDeviceSpinner recordingDeviceSpinner;
     private AudioDeviceSpinner playbackDeviceSpinner;
+    private boolean delay = false;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        Toolbar toolbar = findViewById(R.id.toolbar);
-        setSupportActionBar(toolbar);
+        setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_LANDSCAPE);
+
+        toggleDelayEffect = findViewById(R.id.delayButton);
+        toggleDelayEffect.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                delay = !delay;
+                LiveEffectEngine.setDelay(delay);
+            }
+        });
 
         toggleEffectButton = findViewById(R.id.toggleEffect);
 
