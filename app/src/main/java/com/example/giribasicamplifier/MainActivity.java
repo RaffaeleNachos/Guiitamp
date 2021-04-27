@@ -39,7 +39,7 @@ public class MainActivity extends AppCompatActivity {
     private int apiSelection = OBOE_API_AAUDIO;
     private boolean mAAudioRecommended = true;
     private boolean isPlaying = false;
-    private Button toggleEffectButton;
+    private ImageButton toggleEffectButton;
     private ImageButton toggleDelayEffect;
     private Slider gainSlider;
     private AudioDeviceSpinner recordingDeviceSpinner;
@@ -52,16 +52,16 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
         setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_LANDSCAPE);
 
-        toggleDelayEffect = findViewById(R.id.delayButton);
+/*        toggleDelayEffect = findViewById(R.id.delayButton);
         toggleDelayEffect.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 delay = !delay;
                 LiveEffectEngine.setDelay(delay);
             }
-        });
+        });*/
 
-        toggleEffectButton = findViewById(R.id.toggleEffect);
+        toggleEffectButton = findViewById(R.id.togglePower);
 
         toggleEffectButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -72,7 +72,6 @@ public class MainActivity extends AppCompatActivity {
                 toggleEffect();
             }
         });
-        toggleEffectButton.setText("START");
         gainSlider = findViewById(R.id.gainSlider);
 
         recordingDeviceSpinner = findViewById(R.id.inputSpinner);
@@ -152,7 +151,7 @@ public class MainActivity extends AppCompatActivity {
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
-        getMenuInflater().inflate(R.menu.menu_main, menu);
+        // getMenuInflater().inflate(R.menu.menu_main, menu);
         return true;
     }
 
@@ -161,12 +160,12 @@ public class MainActivity extends AppCompatActivity {
         // Handle action bar item clicks here. The action bar will
         // automatically handle clicks on the Home/Up button, so long
         // as you specify a parent activity in AndroidManifest.xml.
-        int id = item.getItemId();
+        //int id = item.getItemId();
 
         //noinspection SimplifiableIfStatement
-        if (id == R.id.action_settings) {
-            return true;
-        }
+        //if (id == R.id.action_settings) {
+        //    return true;
+        //}
 
         return super.onOptionsItemSelected(item);
     }
@@ -221,7 +220,7 @@ public class MainActivity extends AppCompatActivity {
     private void stopEffect() {
         Log.d(APPNAME, "Stop Effect");
         LiveEffectEngine.setEffectOn(false);
-        toggleEffectButton.setText("START");
+        toggleEffectButton.setBackground(this.getDrawable(R.drawable.ic_switch_off));
         isPlaying = false;
         setSpinnersEnabled(true);
         EnableAudioApiUI(true);
@@ -238,7 +237,7 @@ public class MainActivity extends AppCompatActivity {
         boolean success = LiveEffectEngine.setEffectOn(true);
         if (success) {
             setSpinnersEnabled(false);
-            toggleEffectButton.setText("STOP");
+            toggleEffectButton.setBackground(this.getDrawable(R.drawable.ic_switch_on));
             isPlaying = true;
             EnableAudioApiUI(false);
         } else {

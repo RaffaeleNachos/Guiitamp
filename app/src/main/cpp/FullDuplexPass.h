@@ -18,7 +18,8 @@
 #define SAMPLES_FULLDUPLEXPASS_H
 
 #include "FullDuplexStream.h"
-#include "DelayEffects/DelayEffects.h"
+#include "TSKEffects/FreeVerb.h"
+
 
 class FullDuplexPass : public FullDuplexStream {
 public:
@@ -31,7 +32,7 @@ public:
             void *outputData,
             int   numOutputFrames,
             float gainValue,
-            SimpleDelay* sf,
+            stk::FreeVerb* sf,
             bool delay) {
         // Copy the input samples to the output with a little arbitrary gain change.
 
@@ -46,7 +47,7 @@ public:
         // It is possible that there may be fewer input than output samples.
         int32_t samplesToProcess = std::min(numInputSamples, numOutputSamples);
         for (int32_t i = 0; i < samplesToProcess; i++) {
-            if (delay) *outputFloats++ = sf->process(*inputFloats++) * gainValue; // do some arbitrary processing
+            if (delay) *outputFloats++ = sf->tick(*inputFloats++) * gainValue; // do some arbitrary processing
             else *outputFloats++ = *inputFloats++ * gainValue;
             //*outputFloats = sf->process(*outputFloats);
         }

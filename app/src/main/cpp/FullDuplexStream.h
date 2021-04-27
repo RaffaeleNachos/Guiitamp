@@ -21,7 +21,9 @@
 #include <sys/types.h>
 
 #include "oboe/Oboe.h"
-#include "DelayEffects/SimpleDelay.hpp"
+#include "TSKEffects/Chorus.h"
+#include "TSKEffects/Echo.h"
+#include "TSKEffects/FreeVerb.h"
 
 class FullDuplexStream : public oboe::AudioStreamCallback {
 public:
@@ -29,7 +31,8 @@ public:
     virtual ~FullDuplexStream() = default;
     float gainValue = 1.0;
     bool delay = false;
-    SimpleDelay sf = {8810, 44100};
+    //SimpleDelay sf = {8810, 44100};
+    stk::FreeVerb sf;
 
     void setGainValue(float value){
         gainValue = value;
@@ -63,7 +66,7 @@ public:
             void *outputData,
             int   numOutputFrames,
             float gainValue,
-            SimpleDelay* sf,
+            stk::FreeVerb* sf,
             bool delay) = 0;
 
     /**

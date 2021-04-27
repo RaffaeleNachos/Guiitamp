@@ -12,7 +12,7 @@ add_library(liveEffect
         jni_bridge.cpp
         ./debug-utils/trace.cpp)
 
-# library for audio effects
+# libraries for audio effects
 add_library(audioEffects
         STATIC
         ./BaseClasses/DelayEffectBase.cpp
@@ -20,6 +20,16 @@ add_library(audioEffects
         ./BaseClasses/ModulationBaseClass.cpp
         ./DelayEffects/SimpleFlanger.cpp
         ./DelayEffects/SimpleDelay.cpp)
+
+file(GLOB tskCPPS
+        "./TSKEffects/*.cpp"
+        )
+
+
+add_library(tskEffects
+        STATIC
+        ${tskCPPS}
+        )
 
 target_include_directories(liveEffect
         PRIVATE
@@ -31,6 +41,10 @@ target_include_directories(audioEffects
         ./DelayEffects
         ./FilterEffects)
 
+target_include_directories(tskEffects
+        PRIVATE
+        ./TSKEffects)
+
 
 # Find the Oboe package
 find_package (oboe REQUIRED CONFIG)
@@ -39,6 +53,7 @@ find_package (oboe REQUIRED CONFIG)
 target_link_libraries(liveEffect
         PRIVATE
         audioEffects
+        tskEffects
         android
         atomic
         log
@@ -48,4 +63,5 @@ target_link_libraries(liveEffect
 # disable -Ofast ( and debug ), re-enable it after done debugging.
 target_compile_options(liveEffect PRIVATE -Wall -Werror "$<$<CONFIG:RELEASE>:-Ofast>")
 target_compile_options(audioEffects PRIVATE -Wall -Werror "$<$<CONFIG:RELEASE>:-Ofast>")
+target_compile_options(tskEffects PRIVATE -Wall -Werror "$<$<CONFIG:RELEASE>:-Ofast>")
 
