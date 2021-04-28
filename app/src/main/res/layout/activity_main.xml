@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.coordinatorlayout.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.coordinatorlayout.widget.CoordinatorLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
@@ -7,64 +8,70 @@
     tools:context=".MainActivity">
 
     <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/constraintLayout"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         tools:context=".MainActivity">
 
         <LinearLayout
-            android:id="@+id/linearLayout2"
             android:layout_width="match_parent"
-            android:layout_height="60dp"
-            android:orientation="horizontal"
-            android:weightSum="10"
-            app:layout_constraintTop_toTopOf="parent">
+            android:layout_height="match_parent"
+            android:orientation="vertical">
 
-            <ImageButton
-                android:layout_width="0dp"
+            <LinearLayout
+                android:id="@+id/topLayout"
+                android:layout_width="match_parent"
+                android:layout_height="60dp"
+                android:orientation="horizontal"
+                android:weightSum="10"
+                app:layout_constraintTop_toTopOf="parent">
+
+                <ImageButton
+                    android:id="@+id/side_menu_btn"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="0.8"
+                    android:background="@drawable/ic_baseline_menu_temp" />
+
+                <TextView
+                    android:id="@+id/gain"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:fontFamily="@font/cabin"
+                    android:gravity="center"
+                    android:text="Gain"
+                    android:textSize="30sp"
+                    android:textStyle="bold" />
+
+                <com.google.android.material.slider.Slider
+                    android:id="@+id/gainSlider"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_gravity="center"
+                    android:layout_weight="7"
+                    android:valueFrom="0.0"
+                    android:valueTo="10.0" />
+
+                <ImageButton
+                    android:id="@+id/togglePower"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="0.9"
+                    android:adjustViewBounds="true"
+                    android:background="@drawable/ic_switch_off" />
+
+
+            </LinearLayout>
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/pedalsList"
+                android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:layout_weight="0.8"
-                android:background="@drawable/ic_baseline_menu_temp"/>
-
-            <TextView
-                android:id="@+id/gain"
-                android:layout_width="0dp"
-                android:layout_height="match_parent"
-                android:layout_weight="1"
-                android:fontFamily="@font/cabin"
-                android:gravity="center"
-                android:text="Gain"
-                android:textSize="30sp"
-                android:textStyle="bold" />
-
-            <com.google.android.material.slider.Slider
-                android:id="@+id/gainSlider"
-                android:layout_width="0dp"
-                android:layout_height="match_parent"
-                android:layout_gravity="center"
-                android:layout_weight="7"
-                android:valueFrom="0.0"
-                android:valueTo="10.0" />
-
-            <ImageButton
-                android:id="@+id/togglePower"
-                android:layout_width="0dp"
-                android:layout_height="match_parent"
-                android:layout_weight="0.9"
-                android:adjustViewBounds="true"
-                android:background="@drawable/ic_switch_off"/>
-
+                android:orientation="horizontal"
+                app:layout_constraintTop_toBottomOf="@+id/topLayout" />
 
         </LinearLayout>
-
-        <androidx.recyclerview.widget.RecyclerView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/linearLayout2"
-            android:orientation="horizontal"/>
-
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 

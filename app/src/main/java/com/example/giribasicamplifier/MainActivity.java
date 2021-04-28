@@ -4,28 +4,24 @@ import android.Manifest;
 import android.content.pm.ActivityInfo;
 import android.content.pm.PackageManager;
 import android.media.AudioManager;
-import android.os.Build;
 import android.os.Bundle;
 
 import com.google.android.material.slider.*;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.appcompat.widget.Toolbar;
 import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 import android.util.Log;
 
-import android.view.Menu;
-import android.view.MenuItem;
 import android.view.View;
-import android.widget.AdapterView;
-import android.widget.Button;
 import android.widget.ImageButton;
-import android.widget.RadioButton;
-import android.widget.RadioGroup;
 import android.widget.Toast;
+
+import java.util.ArrayList;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -33,18 +29,13 @@ public class MainActivity extends AppCompatActivity {
 
     private static final String APPNAME = MainActivity.class.getName();
 
-    private static final int OBOE_API_AAUDIO = 0;
-    private static final int OBOE_API_OPENSL_ES = 1;
-
-    private int apiSelection = OBOE_API_AAUDIO;
-    private boolean mAAudioRecommended = true;
     private boolean isPlaying = false;
-    private ImageButton toggleEffectButton;
-    private ImageButton toggleDelayEffect;
+    private ImageButton powerSwitch;
+    private ImageButton sideMenuBtn;
     private Slider gainSlider;
-    private AudioDeviceSpinner recordingDeviceSpinner;
-    private AudioDeviceSpinner playbackDeviceSpinner;
-    private boolean delay = false;
+    private RecyclerView pedalsBtnList;
+    private ArrayList<Pedal> availablePedals;
+    private SideMenu sideMenu;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -52,18 +43,25 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
         setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_LANDSCAPE);
 
-/*        toggleDelayEffect = findViewById(R.id.delayButton);
-        toggleDelayEffect.setOnClickListener(new View.OnClickListener() {
+        sideMenu = new SideMenu();
+        getSupportFragmentManager().beginTransaction().add(sideMenu, null);
+
+        sideMenuBtn = findViewById(R.id.side_menu_btn);
+        sideMenuBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                delay = !delay;
-                LiveEffectEngine.setDelay(delay);
+                getSupportFragmentManager().beginTransaction().add(sideMenu, null);
             }
-        });*/
+        });
 
-        toggleEffectButton = findViewById(R.id.togglePower);
+        // set up pedals list view with supported Pedals
+        pedalsBtnList = findViewById(R.id.pedalsList);
+        pedalsBtnList.setLayoutManager(new LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false));
+        availablePedals = new ArrayList<>();
+        this.setUpPedalList();
 
-        toggleEffectButton.setOnClickListener(new View.OnClickListener() {
+        powerSwitch = findViewById(R.id.togglePower);
+        powerSwitch.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 checkPermission(
@@ -72,36 +70,8 @@ public class MainActivity extends AppCompatActivity {
                 toggleEffect();
             }
         });
+
         gainSlider = findViewById(R.id.gainSlider);
-
-        recordingDeviceSpinner = findViewById(R.id.inputSpinner);
-        recordingDeviceSpinner.setDirectionType(AudioManager.GET_DEVICES_INPUTS);
-        recordingDeviceSpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
-            @Override
-            public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
-                LiveEffectEngine.setRecordingDeviceId(getRecordingDeviceId());
-            }
-
-            @Override
-            public void onNothingSelected(AdapterView<?> adapterView) {
-                // Do nothing
-            }
-        });
-
-        playbackDeviceSpinner = findViewById(R.id.outputSpinner);
-        playbackDeviceSpinner.setDirectionType(AudioManager.GET_DEVICES_OUTPUTS);
-        playbackDeviceSpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
-            @Override
-            public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
-                LiveEffectEngine.setPlaybackDeviceId(getPlaybackDeviceId());
-            }
-
-            @Override
-            public void onNothingSelected(AdapterView<?> adapterView) {
-                // Do nothing
-            }
-        });
-
         gainSlider.addOnChangeListener(new Slider.OnChangeListener() {
             @Override
             public void onValueChange(@NonNull Slider slider, float value, boolean fromUser) {
@@ -109,26 +79,16 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
-
-        ((RadioGroup) findViewById(R.id.radioContainer)).check(R.id.aaudio);
-        findViewById(R.id.aaudio).setOnClickListener(new RadioButton.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                if (((RadioButton) v).isChecked()) {
-                    apiSelection = OBOE_API_AAUDIO;
-                }
-            }
-        });
-        findViewById(R.id.openSLES).setOnClickListener(new RadioButton.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                if (((RadioButton) v).isChecked()) {
-                    apiSelection = OBOE_API_OPENSL_ES;
-                }
-            }
-        });
-
         LiveEffectEngine.setDefaultStreamValues(this);
+    }
+
+    private void setUpPedalList(){
+        availablePedals.add(new Pedal(this.getDrawable(R.drawable.pedals_total_happy_01), this.getDrawable(R.drawable.pedals_total_sad_01)));
+        availablePedals.add(new Pedal(this.getDrawable(R.drawable.pedals_total_happy_02), this.getDrawable(R.drawable.pedals_total_sad_02)));
+        availablePedals.add(new Pedal(this.getDrawable(R.drawable.pedals_total_happy_03), this.getDrawable(R.drawable.pedals_total_sad_03)));
+        availablePedals.add(new Pedal(this.getDrawable(R.drawable.pedals_total_happy_04), this.getDrawable(R.drawable.pedals_total_sad_04)));
+        availablePedals.add(new Pedal(this.getDrawable(R.drawable.pedals_total_happy_05), this.getDrawable(R.drawable.pedals_total_sad_05)));
+        pedalsBtnList.setAdapter(new PedalAdapter(availablePedals));
     }
 
     public void checkPermission(String permission, int requestCode) {
@@ -147,44 +107,6 @@ public class MainActivity extends AppCompatActivity {
         }
     }
 
-
-    @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-        // Inflate the menu; this adds items to the action bar if it is present.
-        // getMenuInflater().inflate(R.menu.menu_main, menu);
-        return true;
-    }
-
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-        // Handle action bar item clicks here. The action bar will
-        // automatically handle clicks on the Home/Up button, so long
-        // as you specify a parent activity in AndroidManifest.xml.
-        //int id = item.getItemId();
-
-        //noinspection SimplifiableIfStatement
-        //if (id == R.id.action_settings) {
-        //    return true;
-        //}
-
-        return super.onOptionsItemSelected(item);
-    }
-
-    private void EnableAudioApiUI(boolean enable) {
-        if (apiSelection == OBOE_API_AAUDIO && !mAAudioRecommended) {
-            apiSelection = OBOE_API_OPENSL_ES;
-        }
-        findViewById(R.id.openSLES).setEnabled(enable);
-        if (!mAAudioRecommended) {
-            findViewById(R.id.aaudio).setEnabled(false);
-        } else {
-            findViewById(R.id.aaudio).setEnabled(enable);
-        }
-
-        ((RadioGroup) findViewById(R.id.radioContainer))
-                .check(apiSelection == OBOE_API_AAUDIO ? R.id.aaudio : R.id.openSLES);
-    }
-
     @Override
     protected void onStart() {
         super.onStart();
@@ -195,9 +117,9 @@ public class MainActivity extends AppCompatActivity {
     protected void onResume() {
         super.onResume();
         LiveEffectEngine.create();
-        mAAudioRecommended = LiveEffectEngine.isAAudioRecommended();
-        EnableAudioApiUI(true);
-        LiveEffectEngine.setAPI(apiSelection);
+/*        sideMenu.mAAudioRecommended = LiveEffectEngine.isAAudioRecommended();
+        sideMenu.EnableAudioApiUI(true);*/
+        LiveEffectEngine.setAPI(sideMenu.apiSelection);
     }
 
     @Override
@@ -211,7 +133,7 @@ public class MainActivity extends AppCompatActivity {
         if (isPlaying) {
             stopEffect();
         } else {
-            LiveEffectEngine.setAPI(apiSelection);
+            LiveEffectEngine.setAPI(sideMenu.apiSelection);
             startEffect();
         }
     }
@@ -220,42 +142,24 @@ public class MainActivity extends AppCompatActivity {
     private void stopEffect() {
         Log.d(APPNAME, "Stop Effect");
         LiveEffectEngine.setEffectOn(false);
-        toggleEffectButton.setBackground(this.getDrawable(R.drawable.ic_switch_off));
+        powerSwitch.setBackground(this.getDrawable(R.drawable.ic_switch_off));
         isPlaying = false;
-        setSpinnersEnabled(true);
-        EnableAudioApiUI(true);
+        //sideMenu.setSpinnersEnabled(true);
+        //sideMenu.EnableAudioApiUI(true);
     }
 
     private void startEffect() {
         Log.d(APPNAME, "Start Effect");
 
-//        if (!isRecordPermissionGranted()){
-//            requestRecordPermission();
-//            return;
-//        }
-
         boolean success = LiveEffectEngine.setEffectOn(true);
         if (success) {
-            setSpinnersEnabled(false);
-            toggleEffectButton.setBackground(this.getDrawable(R.drawable.ic_switch_on));
+            sideMenu.setSpinnersEnabled(false);
+            powerSwitch.setBackground(this.getDrawable(R.drawable.ic_switch_on));
             isPlaying = true;
-            EnableAudioApiUI(false);
+            sideMenu.EnableAudioApiUI(false);
         } else {
             isPlaying = false;
         }
-    }
-
-    private void setSpinnersEnabled(boolean isEnabled) {
-        recordingDeviceSpinner.setEnabled(isEnabled);
-        playbackDeviceSpinner.setEnabled(isEnabled);
-    }
-
-    private int getRecordingDeviceId() {
-        return ((AudioDeviceListEntry) recordingDeviceSpinner.getSelectedItem()).getId();
-    }
-
-    private int getPlaybackDeviceId() {
-        return ((AudioDeviceListEntry) playbackDeviceSpinner.getSelectedItem()).getId();
     }
 
     //    microphone permissions
@@ -270,15 +174,9 @@ public class MainActivity extends AppCompatActivity {
         if (requestCode == AUDIO_PERMISSION_CODE) {
             if (grantResults.length > 0
                     && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
-                Toast.makeText(MainActivity.this,
-                        "Camera Permission Granted",
-                        Toast.LENGTH_SHORT)
-                        .show();
+                //permission granted
             } else {
-                Toast.makeText(MainActivity.this,
-                        "Camera Permission Denied",
-                        Toast.LENGTH_SHORT)
-                        .show();
+                //graceful degrade
             }
         }
     }
