@@ -12,6 +12,7 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
+import androidx.fragment.app.FragmentTransaction;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -44,13 +45,12 @@ public class MainActivity extends AppCompatActivity {
         setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_LANDSCAPE);
 
         sideMenu = new SideMenu();
-        getSupportFragmentManager().beginTransaction().add(sideMenu, null);
 
         sideMenuBtn = findViewById(R.id.side_menu_btn);
         sideMenuBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                getSupportFragmentManager().beginTransaction().add(sideMenu, null);
+                getSupportFragmentManager().beginTransaction().add(R.id.side_menu_fragment, new SideMenu()).commit();
             }
         });
 

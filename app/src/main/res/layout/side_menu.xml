@@ -2,91 +2,133 @@
 <androidx.constraintlayout.widget.ConstraintLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="250dp"
     android:layout_height="match_parent">
 
-    <androidx.fragment.app.FragmentContainerView
-        xmlns:android="http://schemas.android.com/apk/res/android"
-        android:id="@+id/side_menu_fragment"
-        android:layout_width="match_parent"
+    <ScrollView
+        android:layout_width="250dp"
         android:layout_height="match_parent"
-        android:name="SideMenu">
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
 
         <LinearLayout
-            android:id="@+id/linearLayout"
-            android:layout_width="250dp"
+            android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:orientation="vertical"
-            android:weightSum="8"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            android:fontFamily="@font/cabin">
+            android:orientation="vertical">
 
-            <TextView
+            <LinearLayout
+                android:id="@+id/menu_header"
                 android:layout_width="match_parent"
-                android:layout_height="0dp"
-                android:text="@string/input"
-                android:layout_weight="0.8"
-                android:fontFamily="@font/cabin"/>
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent">
 
-            <com.example.giribasicamplifier.AudioDeviceSpinner
-                android:id="@+id/inputSpinner"
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="24dp"
+                    android:layout_marginTop="24dp"
+                    android:layout_marginEnd="24dp"
+                    android:fontFamily="@font/cabin"
+                    android:text="@string/header_title"
+                    android:textAppearance="?attr/textAppearanceHeadline6" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="24dp"
+                    android:layout_marginEnd="24dp"
+                    android:layout_marginBottom="24dp"
+                    android:fontFamily="@font/cabin"
+                    android:text="@string/header_text"
+                    android:textAppearance="?attr/textAppearanceBody2"
+                    android:textColor="@color/material_on_surface_emphasis_medium" />
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/linearLayout"
                 android:layout_width="250dp"
-                android:layout_height="0dp"
-                android:layout_weight="1" />
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/cabin"
+                android:orientation="vertical"
+                android:weightSum="8"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/menu_header">
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="0dp"
+                    android:layout_weight="0.8"
+                    android:fontFamily="@font/cabin"
+                    android:text="@string/input" />
+
+                <com.example.giribasicamplifier.AudioDeviceSpinner
+                    android:id="@+id/inputSpinner"
+                    android:layout_width="250dp"
+                    android:layout_height="0dp"
+                    android:layout_weight="2" />
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="0dp"
+                    android:layout_weight="0.8"
+                    android:fontFamily="@font/cabin"
+                    android:text="@string/output" />
+
+                <com.example.giribasicamplifier.AudioDeviceSpinner
+                    android:id="@+id/outputSpinner"
+                    android:layout_width="250dp"
+                    android:layout_height="0dp"
+                    android:layout_weight="2" />
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="0dp"
+                    android:layout_weight="0.8"
+                    android:fontFamily="@font/cabin"
+                    android:text="@string/audio_driver" />
+
+                <RadioGroup
+                    android:id="@+id/radioContainer"
+                    android:layout_width="250dp"
+                    android:layout_height="0dp"
+                    android:layout_weight="1.7"
+                    android:orientation="horizontal"
+                    android:weightSum="2">
+
+                    <RadioButton
+                        android:id="@+id/openSLES"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:text="OpenSL ES" />
+
+                    <RadioButton
+                        android:id="@+id/aaudio"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:text="AAudio" />
+                </RadioGroup>
+
+            </LinearLayout>
 
             <TextView
-                android:layout_width="match_parent"
-                android:layout_height="0dp"
-                android:text="@string/output"
-                android:layout_weight="0.8"
-                android:fontFamily="@font/cabin"/>
-
-            <com.example.giribasicamplifier.AudioDeviceSpinner
-                android:id="@+id/outputSpinner"
-                android:layout_width="250dp"
-                android:layout_height="0dp"
-                android:layout_weight="1" />
-
-            <TextView
-                android:layout_width="match_parent"
-                android:layout_height="0dp"
-                android:text="@string/audio_driver"
-                android:layout_weight="0.8"
-                android:fontFamily="@font/cabin"/>
-
-            <RadioGroup
-                android:id="@+id/radioContainer"
-                android:layout_width="250dp"
-                android:layout_height="0dp"
-                android:layout_weight="1"
-                android:orientation="horizontal"
-                android:weightSum="2">
-
-                <RadioButton
-                    android:id="@+id/openSLES"
-                    android:layout_width="0dp"
-                    android:layout_height="60dp"
-                    android:layout_weight="1"
-                    android:text="OpenSL ES" />
-
-                <RadioButton
-                    android:id="@+id/aaudio"
-                    android:layout_width="0dp"
-                    android:layout_height="60dp"
-                    android:layout_weight="1"
-                    android:text="AAudio" />
-            </RadioGroup>
-
-            <TextView
-                android:layout_width="match_parent"
-                android:layout_height="0dp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="24dp"
+                android:layout_marginTop="24dp"
+                android:layout_marginEnd="24dp"
+                android:fontFamily="@font/cabin"
                 android:text="@string/tutorial"
-                android:layout_weight="0.8"
-                android:fontFamily="@font/cabin"/>
+                android:textAppearance="?attr/textAppearanceHeadline6" />
 
         </LinearLayout>
 
-    </androidx.fragment.app.FragmentContainerView>
+    </ScrollView>
+
 </androidx.constraintlayout.widget.ConstraintLayout>

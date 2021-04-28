@@ -2,7 +2,9 @@ package com.example.giribasicamplifier;
 
 import android.media.AudioManager;
 import android.os.Bundle;
+import android.view.LayoutInflater;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
@@ -25,10 +27,14 @@ public class SideMenu extends Fragment {
     }
 
     @Override
-    public void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
+    public View onCreateView(LayoutInflater inflater, ViewGroup parent, Bundle savedInstanceState) {
+        // Defines the xml file for the fragment
+        return inflater.inflate(R.layout.side_menu, parent, false);
+    }
 
-        recordingDeviceSpinner = getView().findViewById(R.id.inputSpinner);
+    @Override
+    public void onViewCreated(View view, Bundle savedInstanceState) {
+        recordingDeviceSpinner = view.findViewById(R.id.inputSpinner);
         recordingDeviceSpinner.setDirectionType(AudioManager.GET_DEVICES_INPUTS);
         recordingDeviceSpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
@@ -42,7 +48,7 @@ public class SideMenu extends Fragment {
             }
         });
 
-        playbackDeviceSpinner = getView().findViewById(R.id.outputSpinner);
+        playbackDeviceSpinner = view.findViewById(R.id.outputSpinner);
         playbackDeviceSpinner.setDirectionType(AudioManager.GET_DEVICES_OUTPUTS);
         playbackDeviceSpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
@@ -56,8 +62,8 @@ public class SideMenu extends Fragment {
             }
         });
 
-        ((RadioGroup) getView().findViewById(R.id.radioContainer)).check(R.id.aaudio);
-        getView().findViewById(R.id.aaudio).setOnClickListener(new RadioButton.OnClickListener() {
+        ((RadioGroup) view.findViewById(R.id.radioContainer)).check(R.id.aaudio);
+        view.findViewById(R.id.aaudio).setOnClickListener(new RadioButton.OnClickListener() {
             @Override
             public void onClick(View v) {
                 if (((RadioButton) v).isChecked()) {
@@ -65,7 +71,7 @@ public class SideMenu extends Fragment {
                 }
             }
         });
-        getView().findViewById(R.id.openSLES).setOnClickListener(new RadioButton.OnClickListener() {
+        view.findViewById(R.id.openSLES).setOnClickListener(new RadioButton.OnClickListener() {
             @Override
             public void onClick(View v) {
                 if (((RadioButton) v).isChecked()) {
@@ -74,6 +80,7 @@ public class SideMenu extends Fragment {
             }
         });
     }
+
 
     private int getRecordingDeviceId() {
         return ((AudioDeviceListEntry) recordingDeviceSpinner.getSelectedItem()).getId();
