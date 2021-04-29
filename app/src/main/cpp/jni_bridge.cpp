@@ -158,5 +158,44 @@ Java_com_example_giribasicamplifier_LiveEffectEngine_setDelay(JNIEnv *env, jclas
     engine->mFullDuplexPass.setDelay(value);
 }
 
+JNIEXPORT void JNICALL
+Java_com_example_giribasicamplifier_LiveEffectEngine_setFlanger(JNIEnv *env, jclass clazz,
+                                                              jboolean value) {
+    if (engine == nullptr) {
+        LOGE(
+                "Engine is null, you must call createEngine before calling this "
+                "method");
+        return;
+    }
+
+    engine->mFullDuplexPass.setFlanger(value);
+}
+
+JNIEXPORT void JNICALL
+Java_com_example_giribasicamplifier_LiveEffectEngine_setEcho(JNIEnv *env, jclass clazz,
+                                                              jboolean value) {
+    if (engine == nullptr) {
+        LOGE(
+                "Engine is null, you must call createEngine before calling this "
+                "method");
+        return;
+    }
+
+    engine->mFullDuplexPass.setEcho(value);
+}
+
+JNIEXPORT void JNICALL
+Java_com_example_giribasicamplifier_LiveEffectEngine_setReverb(JNIEnv *env, jclass clazz,
+                                                              jboolean value) {
+    if (engine == nullptr) {
+        LOGE(
+                "Engine is null, you must call createEngine before calling this "
+                "method");
+        return;
+    }
+
+    engine->mFullDuplexPass.setReverb(value);
+}
+
 
 } // extern "C"

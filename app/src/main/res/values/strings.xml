@@ -8,6 +8,6 @@
     <string name="output">Select Output:</string>
     <string name="audio_driver">Select AudioDriver:</string>
     <string name="tutorial">How to connect the guitar?</string>
-    <string name="header_title">giRi Basic Amplifier</string>
+    <string name="header_title">giRi Basic Amp</string>
     <string name="header_text">Audio Settings</string>
 </resources>

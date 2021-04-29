@@ -24,23 +24,53 @@
 #include "TSKEffects/Chorus.h"
 #include "TSKEffects/Echo.h"
 #include "TSKEffects/FreeVerb.h"
+#include "DelayEffects/SimpleDelay.hpp"
 
 class FullDuplexStream : public oboe::AudioStreamCallback {
 public:
     FullDuplexStream() {}
     virtual ~FullDuplexStream() = default;
+
+    //GAIN
+
     float gainValue = 1.0;
-    bool delay = false;
-    //SimpleDelay sf = {8810, 44100};
-    stk::FreeVerb sf;
 
     void setGainValue(float value){
         gainValue = value;
     }
 
+    //DELAY
+
+    bool delay = false;
+
     void setDelay(bool value){
         delay = value;
     }
+
+    SimpleDelay simpleDelay = {8810, 44100};
+
+    //ECHO
+    bool echo = false;
+
+    void setEcho(bool value){
+        echo = value;
+    }
+
+    //FLANGER
+    bool flanger = false;
+
+    void setFlanger(bool value){
+        flanger = value;
+    }
+
+    //REVERB
+    bool reverb = false;
+
+    void setReverb(bool value){
+        reverb = value;
+    }
+
+    stk::FreeVerb simpleReverb;
 
     void setInputStream(std::shared_ptr<oboe::AudioStream> stream) {
         mInputStream = stream;
@@ -66,7 +96,9 @@ public:
             void *outputData,
             int   numOutputFrames,
             float gainValue,
-            stk::FreeVerb* sf,
+            stk::FreeVerb* simpleReverb,
+            SimpleDelay* simpleDelay,
+            bool reverb,
             bool delay) = 0;
 
     /**

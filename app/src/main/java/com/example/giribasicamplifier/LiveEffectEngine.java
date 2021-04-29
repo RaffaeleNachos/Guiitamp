@@ -39,6 +39,9 @@ public enum LiveEffectEngine {
     static native void native_setDefaultStreamValues(int defaultSampleRate, int defaultFramesPerBurst);
     static native void setGain(float value);
     static native void setDelay(boolean value);
+    static native void setEcho(boolean value);
+    static native void setFlanger(boolean value);
+    static native void setReverb(boolean value);
 
     static void setDefaultStreamValues(Context context) {
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.JELLY_BEAN_MR1){

@@ -13,14 +13,6 @@
         android:layout_height="match_parent"
         tools:context=".MainActivity">
 
-        <FrameLayout
-            android:id="@+id/side_menu_fragment"
-            android:layout_width="250dp"
-            android:layout_height="match_parent"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"></FrameLayout>
-
         <LinearLayout
             android:id="@+id/linearLayout2"
             android:layout_width="match_parent"
@@ -39,8 +31,13 @@
                     android:id="@+id/side_menu_btn"
                     android:layout_width="0dp"
                     android:layout_height="match_parent"
-                    android:layout_weight="0.8"
-                    android:background="@drawable/ic_baseline_menu_temp" />
+                    android:layout_weight="1"
+                    android:src="@drawable/ic_baseline_menu_temp"
+                    android:scaleType="fitCenter"
+                    android:adjustViewBounds="true"
+                    android:layout_gravity="center_vertical"
+                    app:layout_constraintDimensionRatio="1:1"
+                    android:background="#0000"/>
 
                 <TextView
                     android:id="@+id/gain"
@@ -66,9 +63,14 @@
                     android:id="@+id/togglePower"
                     android:layout_width="0dp"
                     android:layout_height="match_parent"
-                    android:layout_weight="0.9"
+                    android:layout_weight="1"
                     android:adjustViewBounds="true"
-                    android:background="@drawable/ic_switch_off" />
+                    android:scaleType="fitCenter"
+                    android:layout_gravity="center_vertical"
+                    android:src="@drawable/ic_switch_off"
+                    app:layout_constraintDimensionRatio="1:1"
+                    android:background="#0000"
+                    />
 
 
             </LinearLayout>
@@ -81,6 +83,14 @@
                 app:layout_constraintTop_toBottomOf="@+id/topLayout" />
 
         </LinearLayout>
+
+        <FrameLayout
+            android:id="@+id/side_menu_fragment"
+            android:layout_width="250dp"
+            android:layout_height="match_parent"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"></FrameLayout>
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 

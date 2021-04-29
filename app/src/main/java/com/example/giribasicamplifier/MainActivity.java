@@ -12,7 +12,6 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
-import androidx.fragment.app.FragmentTransaction;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -23,6 +22,13 @@ import android.widget.ImageButton;
 import android.widget.Toast;
 
 import java.util.ArrayList;
+
+enum Effect {
+    Delay,
+    Echo,
+    Reverb,
+    Flanger
+}
 
 public class MainActivity extends AppCompatActivity {
 
@@ -35,6 +41,7 @@ public class MainActivity extends AppCompatActivity {
     private ImageButton sideMenuBtn;
     private Slider gainSlider;
     private RecyclerView pedalsBtnList;
+    private PedalAdapter pedalAdapter;
     private ArrayList<Pedal> availablePedals;
     private SideMenu sideMenu;
 
@@ -58,6 +65,7 @@ public class MainActivity extends AppCompatActivity {
         pedalsBtnList = findViewById(R.id.pedalsList);
         pedalsBtnList.setLayoutManager(new LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false));
         availablePedals = new ArrayList<>();
+        pedalAdapter = new PedalAdapter();
         this.setUpPedalList();
 
         powerSwitch = findViewById(R.id.togglePower);
@@ -83,12 +91,13 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void setUpPedalList(){
-        availablePedals.add(new Pedal(this.getDrawable(R.drawable.pedals_total_happy_01), this.getDrawable(R.drawable.pedals_total_sad_01)));
-        availablePedals.add(new Pedal(this.getDrawable(R.drawable.pedals_total_happy_02), this.getDrawable(R.drawable.pedals_total_sad_02)));
-        availablePedals.add(new Pedal(this.getDrawable(R.drawable.pedals_total_happy_03), this.getDrawable(R.drawable.pedals_total_sad_03)));
-        availablePedals.add(new Pedal(this.getDrawable(R.drawable.pedals_total_happy_04), this.getDrawable(R.drawable.pedals_total_sad_04)));
-        availablePedals.add(new Pedal(this.getDrawable(R.drawable.pedals_total_happy_05), this.getDrawable(R.drawable.pedals_total_sad_05)));
-        pedalsBtnList.setAdapter(new PedalAdapter(availablePedals));
+        availablePedals.add(new Pedal(this.getDrawable(R.drawable.pedals_total_happy_01), this.getDrawable(R.drawable.pedals_total_sad_01), Effect.Delay));
+        availablePedals.add(new Pedal(this.getDrawable(R.drawable.pedals_total_happy_02), this.getDrawable(R.drawable.pedals_total_sad_02), Effect.Echo));
+        availablePedals.add(new Pedal(this.getDrawable(R.drawable.pedals_total_happy_03), this.getDrawable(R.drawable.pedals_total_sad_03), Effect.Reverb));
+        availablePedals.add(new Pedal(this.getDrawable(R.drawable.pedals_total_happy_04), this.getDrawable(R.drawable.pedals_total_sad_04), Effect.Flanger));
+        availablePedals.add(new Pedal(this.getDrawable(R.drawable.pedals_total_happy_05), this.getDrawable(R.drawable.pedals_total_sad_05), null));
+        pedalAdapter.setPedalList(availablePedals);
+        pedalsBtnList.setAdapter(pedalAdapter);
     }
 
     public void checkPermission(String permission, int requestCode) {
@@ -142,10 +151,9 @@ public class MainActivity extends AppCompatActivity {
     private void stopEffect() {
         Log.d(APPNAME, "Stop Effect");
         LiveEffectEngine.setEffectOn(false);
-        powerSwitch.setBackground(this.getDrawable(R.drawable.ic_switch_off));
+        powerSwitch.setImageResource(R.drawable.ic_switch_off);
         isPlaying = false;
-        //sideMenu.setSpinnersEnabled(true);
-        //sideMenu.EnableAudioApiUI(true);
+        sideMenu.setSpinnersEnabled(true);
     }
 
     private void startEffect() {
@@ -154,9 +162,8 @@ public class MainActivity extends AppCompatActivity {
         boolean success = LiveEffectEngine.setEffectOn(true);
         if (success) {
             sideMenu.setSpinnersEnabled(false);
-            powerSwitch.setBackground(this.getDrawable(R.drawable.ic_switch_on));
+            powerSwitch.setImageResource(R.drawable.ic_switch_on);
             isPlaying = true;
-            sideMenu.EnableAudioApiUI(false);
         } else {
             isPlaying = false;
         }

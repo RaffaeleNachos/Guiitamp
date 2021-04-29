@@ -17,19 +17,19 @@ public class PedalAdapter extends RecyclerView.Adapter<PedalAdapter.ViewHolder> 
     public static class ViewHolder extends RecyclerView.ViewHolder {
         private final ImageButton imageBtn;
 
-        public ViewHolder(View view) {
+        public ViewHolder(View view, PedalAdapter pa) {
             super(view);
             // Define click listener for the ViewHolder's View
 
             imageBtn = (ImageButton) view.findViewById(R.id.pedalImageButton);
-            /*        toggleDelayEffect = findViewById(R.id.delayButton);
-        toggleDelayEffect.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                delay = !delay;
-                LiveEffectEngine.setDelay(delay);
-            }
-        });*/
+            imageBtn.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    pa.pedalList.get(getAdapterPosition()).isActive = !pa.pedalList.get(getAdapterPosition()).isActive;
+                    pa.pedalList.get(getAdapterPosition()).triggerEffect();
+                    pa.notifyDataSetChanged();
+                }
+            });
         }
 
         public ImageButton getImageButton() {
@@ -37,15 +37,10 @@ public class PedalAdapter extends RecyclerView.Adapter<PedalAdapter.ViewHolder> 
         }
     }
 
-    /**
-     * Initialize the dataset of the Adapter.
-     *
-     * @param dataSet String[] containing the data to populate views to be used
-     * by RecyclerView.
-     */
     public PedalAdapter(ArrayList<Pedal> dataSet) {
         pedalList = dataSet;
     }
+    public PedalAdapter() { }
 
     // Create new views (invoked by the layout manager)
     @Override
@@ -54,7 +49,7 @@ public class PedalAdapter extends RecyclerView.Adapter<PedalAdapter.ViewHolder> 
         View view = LayoutInflater.from(viewGroup.getContext())
                 .inflate(R.layout.pedal_item, viewGroup, false);
 
-        return new ViewHolder(view);
+        return new ViewHolder(view, this);
     }
 
     // Replace the contents of a view (invoked by the layout manager)
@@ -63,12 +58,21 @@ public class PedalAdapter extends RecyclerView.Adapter<PedalAdapter.ViewHolder> 
 
         // Get element from your dataset at this position and replace the
         // contents of the view with that element
-        viewHolder.getImageButton().setBackground(pedalList.get(position).getHappy());
+        if (pedalList.get(position).isActive) {
+            viewHolder.getImageButton().setBackground(pedalList.get(position).getHappy());
+        } else {
+            viewHolder.getImageButton().setBackground(pedalList.get(position).getSad());
+        }
     }
 
     // Return the size of your dataset (invoked by the layout manager)
     @Override
     public int getItemCount() {
         return pedalList.size();
+    }
+
+    public void setPedalList(ArrayList<Pedal> pedalList) {
+        this.pedalList = pedalList;
+        this.notifyDataSetChanged();
     }
 }

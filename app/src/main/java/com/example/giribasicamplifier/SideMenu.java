@@ -1,11 +1,13 @@
 package com.example.giribasicamplifier;
 
+import android.app.Activity;
 import android.media.AudioManager;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
+import android.widget.ImageButton;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
 
@@ -17,10 +19,11 @@ public class SideMenu extends Fragment {
     private static final int OBOE_API_OPENSL_ES = 1;
 
     public int apiSelection = OBOE_API_AAUDIO;
-    public boolean mAAudioRecommended = true;
 
     private AudioDeviceSpinner recordingDeviceSpinner;
     private AudioDeviceSpinner playbackDeviceSpinner;
+
+    private ImageButton back;
 
     public SideMenu(){
         super(R.layout.side_menu);
@@ -34,6 +37,15 @@ public class SideMenu extends Fragment {
 
     @Override
     public void onViewCreated(View view, Bundle savedInstanceState) {
+
+        back = view.findViewById(R.id.close_side_menu);
+        back.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                getActivity().getSupportFragmentManager().beginTransaction().remove(SideMenu.this).commit();
+            }
+        });
+
         recordingDeviceSpinner = view.findViewById(R.id.inputSpinner);
         recordingDeviceSpinner.setDirectionType(AudioManager.GET_DEVICES_INPUTS);
         recordingDeviceSpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
@@ -91,22 +103,9 @@ public class SideMenu extends Fragment {
     }
 
     public void setSpinnersEnabled(boolean isEnabled) {
-        recordingDeviceSpinner.setEnabled(isEnabled);
-        playbackDeviceSpinner.setEnabled(isEnabled);
-    }
-
-    public void EnableAudioApiUI(boolean enable) {
-        if (apiSelection == OBOE_API_AAUDIO && !mAAudioRecommended) {
-            apiSelection = OBOE_API_OPENSL_ES;
+        if (recordingDeviceSpinner != null && playbackDeviceSpinner != null) {
+            recordingDeviceSpinner.setEnabled(isEnabled);
+            playbackDeviceSpinner.setEnabled(isEnabled);
         }
-        getView().findViewById(R.id.openSLES).setEnabled(enable);
-        if (!mAAudioRecommended) {
-            getView().findViewById(R.id.aaudio).setEnabled(false);
-        } else {
-            getView().findViewById(R.id.aaudio).setEnabled(enable);
-        }
-
-        ((RadioGroup) getView().findViewById(R.id.radioContainer))
-                .check(apiSelection == OBOE_API_AAUDIO ? R.id.aaudio : R.id.openSLES);
     }
 }

@@ -6,11 +6,13 @@ public class Pedal {
 
     private Drawable happy;
     private Drawable sad;
-    private boolean isActive = false;
+    public boolean isActive = false;
+    public Effect effect;
 
-    public Pedal(Drawable happy, Drawable sad){
+    public Pedal(Drawable happy, Drawable sad, Effect effect){
         this.happy = happy;
         this.sad = sad;
+        this.effect = effect;
     }
 
     public void setHappy(Drawable happy) {
@@ -29,7 +31,22 @@ public class Pedal {
         return sad;
     }
 
-    public void setActive(boolean active) {
-        isActive = active;
+    public void triggerEffect(){
+        switch (effect) {
+            case Delay:
+                LiveEffectEngine.setDelay(isActive);
+                break;
+            case Echo:
+                LiveEffectEngine.setEcho(isActive);
+                break;
+            case Reverb:
+                LiveEffectEngine.setReverb(isActive);
+                break;
+            case Flanger:
+                LiveEffectEngine.setFlanger(isActive);
+                break;
+            default:
+                break;
+        }
     }
 }
