@@ -40,14 +40,14 @@ public:
     }
 
     //DELAY
-
     bool delay = false;
 
     void setDelay(bool value){
         delay = value;
     }
 
-    SimpleDelay simpleDelay = {8810, 44100};
+    //stk::Delay simpleDelay = {0, 4095};
+    stk::Delay simpleDelay;
 
     //ECHO
     bool echo = false;
@@ -56,12 +56,17 @@ public:
         echo = value;
     }
 
-    //FLANGER
-    bool flanger = false;
+    stk::Echo simpleEcho;
 
-    void setFlanger(bool value){
-        flanger = value;
+    //CHORUS
+    bool chorus = false;
+
+    void setChorus(bool value){
+        chorus = value;
     }
+
+    //stk::Chorus simpleChorus = {6000};
+    stk::Chorus simpleChorus;
 
     //REVERB
     bool reverb = false;
@@ -71,6 +76,8 @@ public:
     }
 
     stk::FreeVerb simpleReverb;
+
+
 
     void setInputStream(std::shared_ptr<oboe::AudioStream> stream) {
         mInputStream = stream;
@@ -94,12 +101,7 @@ public:
             int   numInputFrames,
             std::shared_ptr<oboe::AudioStream> outputStream,
             void *outputData,
-            int   numOutputFrames,
-            float gainValue,
-            stk::FreeVerb* simpleReverb,
-            SimpleDelay* simpleDelay,
-            bool reverb,
-            bool delay) = 0;
+            int   numOutputFrames) = 0;
 
     /**
      * Called by Oboe when the stream is ready to process audio.

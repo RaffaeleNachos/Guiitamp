@@ -159,7 +159,7 @@ Java_com_example_giribasicamplifier_LiveEffectEngine_setDelay(JNIEnv *env, jclas
 }
 
 JNIEXPORT void JNICALL
-Java_com_example_giribasicamplifier_LiveEffectEngine_setFlanger(JNIEnv *env, jclass clazz,
+Java_com_example_giribasicamplifier_LiveEffectEngine_setChorus(JNIEnv *env, jclass clazz,
                                                               jboolean value) {
     if (engine == nullptr) {
         LOGE(
@@ -168,7 +168,7 @@ Java_com_example_giribasicamplifier_LiveEffectEngine_setFlanger(JNIEnv *env, jcl
         return;
     }
 
-    engine->mFullDuplexPass.setFlanger(value);
+    engine->mFullDuplexPass.setChorus(value);
 }
 
 JNIEXPORT void JNICALL

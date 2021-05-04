@@ -23,13 +23,6 @@ import android.widget.Toast;
 
 import java.util.ArrayList;
 
-enum Effect {
-    Delay,
-    Echo,
-    Reverb,
-    Flanger
-}
-
 public class MainActivity extends AppCompatActivity {
 
     private static final int AUDIO_PERMISSION_CODE = 1;
@@ -91,11 +84,11 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void setUpPedalList(){
-        availablePedals.add(new Pedal(this.getDrawable(R.drawable.pedals_total_happy_01), this.getDrawable(R.drawable.pedals_total_sad_01), Effect.Delay));
-        availablePedals.add(new Pedal(this.getDrawable(R.drawable.pedals_total_happy_02), this.getDrawable(R.drawable.pedals_total_sad_02), Effect.Echo));
-        availablePedals.add(new Pedal(this.getDrawable(R.drawable.pedals_total_happy_03), this.getDrawable(R.drawable.pedals_total_sad_03), Effect.Reverb));
-        availablePedals.add(new Pedal(this.getDrawable(R.drawable.pedals_total_happy_04), this.getDrawable(R.drawable.pedals_total_sad_04), Effect.Flanger));
-        availablePedals.add(new Pedal(this.getDrawable(R.drawable.pedals_total_happy_05), this.getDrawable(R.drawable.pedals_total_sad_05), null));
+        availablePedals.add(new Chorus(this.getDrawable(R.drawable.pedals_total_happy_01), this.getDrawable(R.drawable.pedals_total_sad_01)));
+        availablePedals.add(new Delay(this.getDrawable(R.drawable.pedals_total_happy_03), this.getDrawable(R.drawable.pedals_total_sad_03)));
+        availablePedals.add(new Reverb(this.getDrawable(R.drawable.pedals_total_happy_04), this.getDrawable(R.drawable.pedals_total_sad_04)));
+        availablePedals.add(new Echo(this.getDrawable(R.drawable.pedals_total_happy_02), this.getDrawable(R.drawable.pedals_total_sad_02)));
+        availablePedals.add(new BasicAmplifier(this.getDrawable(R.drawable.pedals_total_happy_05), this.getDrawable(R.drawable.pedals_total_sad_05)));
         pedalAdapter.setPedalList(availablePedals);
         pedalsBtnList.setAdapter(pedalAdapter);
     }
@@ -152,6 +145,9 @@ public class MainActivity extends AppCompatActivity {
         Log.d(APPNAME, "Stop Effect");
         LiveEffectEngine.setEffectOn(false);
         powerSwitch.setImageResource(R.drawable.ic_switch_off);
+        // set the amp off -> sad
+        availablePedals.get(availablePedals.size() - 1).isActive = false;
+        pedalAdapter.notifyDataSetChanged();
         isPlaying = false;
         sideMenu.setSpinnersEnabled(true);
     }
@@ -163,6 +159,9 @@ public class MainActivity extends AppCompatActivity {
         if (success) {
             sideMenu.setSpinnersEnabled(false);
             powerSwitch.setImageResource(R.drawable.ic_switch_on);
+            // set the amp on -> happy
+            availablePedals.get(availablePedals.size() - 1).isActive = true;
+            pedalAdapter.notifyDataSetChanged();
             isPlaying = true;
         } else {
             isPlaying = false;

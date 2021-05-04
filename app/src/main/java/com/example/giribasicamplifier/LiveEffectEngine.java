@@ -40,7 +40,7 @@ public enum LiveEffectEngine {
     static native void setGain(float value);
     static native void setDelay(boolean value);
     static native void setEcho(boolean value);
-    static native void setFlanger(boolean value);
+    static native void setChorus(boolean value);
     static native void setReverb(boolean value);
 
     static void setDefaultStreamValues(Context context) {

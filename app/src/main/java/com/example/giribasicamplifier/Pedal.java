@@ -2,17 +2,15 @@ package com.example.giribasicamplifier;
 
 import android.graphics.drawable.Drawable;
 
-public class Pedal {
+public abstract class Pedal {
 
     private Drawable happy;
     private Drawable sad;
     public boolean isActive = false;
-    public Effect effect;
 
-    public Pedal(Drawable happy, Drawable sad, Effect effect){
+    public Pedal(Drawable happy, Drawable sad){
         this.happy = happy;
         this.sad = sad;
-        this.effect = effect;
     }
 
     public void setHappy(Drawable happy) {
@@ -31,22 +29,6 @@ public class Pedal {
         return sad;
     }
 
-    public void triggerEffect(){
-        switch (effect) {
-            case Delay:
-                LiveEffectEngine.setDelay(isActive);
-                break;
-            case Echo:
-                LiveEffectEngine.setEcho(isActive);
-                break;
-            case Reverb:
-                LiveEffectEngine.setReverb(isActive);
-                break;
-            case Flanger:
-                LiveEffectEngine.setFlanger(isActive);
-                break;
-            default:
-                break;
-        }
-    }
+    abstract public void triggerEffect();
+
 }

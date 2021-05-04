@@ -30,12 +30,7 @@ public:
             int   numInputFrames,
             std::shared_ptr<oboe::AudioStream> outputStream,
             void *outputData,
-            int   numOutputFrames,
-            float gainValue,
-            stk::FreeVerb* simpleReverb,
-            SimpleDelay* simpleDelay,
-            bool reverb,
-            bool delay) {
+            int   numOutputFrames) {
         // Copy the input samples to the output with a little arbitrary gain change.
 
         // This code assumes the data format for both streams is Float.
@@ -49,9 +44,12 @@ public:
         // It is possible that there may be fewer input than output samples.
         int32_t samplesToProcess = std::min(numInputSamples, numOutputSamples);
         for (int32_t i = 0; i < samplesToProcess; i++) {
-            if (delay) *outputFloats++ = simpleDelay->process(*inputFloats++) * gainValue; // do some arbitrary processing
-            else *outputFloats++ = *inputFloats++ * gainValue;
-            //*outputFloats = sf->process(*outputFloats);
+            float toProcess = *inputFloats++;
+            if (chorus) toProcess = simpleChorus.tick(toProcess);
+            if (delay) toProcess = simpleDelay.tick(toProcess);
+            if (reverb) toProcess = simpleReverb.tick(toProcess);
+            if (echo) toProcess = simpleEcho.tick(toProcess);
+            *outputFloats++ = toProcess * gainValue;
         }
 
         // If there are fewer input samples then clear the rest of the buffer.
