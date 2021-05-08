@@ -18,8 +18,4 @@
         <item name="windowActionBar">false</item>
         <item name="windowNoTitle">true</item>
     </style>
-
-    <style name="Theme.GiRiBasicAmplifier.AppBarOverlay" parent="ThemeOverlay.AppCompat.Dark.ActionBar" />
-
-    <style name="Theme.GiRiBasicAmplifier.PopupOverlay" parent="ThemeOverlay.AppCompat.Light" />
 </resources>

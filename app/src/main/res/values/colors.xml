@@ -7,4 +7,10 @@
     <color name="teal_700">#FF018786</color>
     <color name="black">#FF000000</color>
     <color name="white">#FFFFFFFF</color>
+    <color name="pedalboard">#D0D8DC</color>
+    <color name="pedalboard_dark">#BAC4C8</color>
+    <color name="top_main_bar">#272727</color>
+    <color name="top_main_bar_light">#2F2F2F</color>
+    <color name="side_menu_color">#DEDDE0</color>
+
 </resources>

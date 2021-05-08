@@ -55,7 +55,7 @@ public class SideMenu extends Fragment {
 
         recordingDeviceSpinner = view.findViewById(R.id.inputSpinner);
         recordingDeviceSpinner.setDirectionType(AudioManager.GET_DEVICES_INPUTS);
-        recordingDeviceSpinner.setSelection(sharedPref.getInt("recordingDeviceSpinner", 0));
+        recordingDeviceSpinner.setSelection(sharedPref.getInt("recordingDeviceSpinner", 1));
         recordingDeviceSpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
@@ -71,7 +71,7 @@ public class SideMenu extends Fragment {
 
         playbackDeviceSpinner = view.findViewById(R.id.outputSpinner);
         playbackDeviceSpinner.setDirectionType(AudioManager.GET_DEVICES_OUTPUTS);
-        playbackDeviceSpinner.setSelection(sharedPref.getInt("playbackDeviceSpinner", 0));
+        playbackDeviceSpinner.setSelection(sharedPref.getInt("playbackDeviceSpinner", 1));
         playbackDeviceSpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
@@ -108,11 +108,11 @@ public class SideMenu extends Fragment {
         });
         String apiSel = sharedPref.getString("apiSelection", "AAUDIO");
         if (apiSel.equals("AAUDIO")){
-            aaudio.setActivated(true);
-            opensl_es.setActivated(false);
+            aaudio.setChecked(true);
+            opensl_es.setChecked(false);
         } else {
-            aaudio.setActivated(false);
-            opensl_es.setActivated(true);
+            aaudio.setChecked(false);
+            opensl_es.setChecked(true);
         }
     }
 

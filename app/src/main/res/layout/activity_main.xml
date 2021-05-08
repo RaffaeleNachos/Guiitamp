@@ -17,7 +17,8 @@
             android:id="@+id/linearLayout2"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:orientation="vertical">
+            android:orientation="vertical"
+            android:background="@color/pedalboard">
 
             <LinearLayout
                 android:id="@+id/topLayout"
@@ -25,14 +26,15 @@
                 android:layout_height="60dp"
                 android:orientation="horizontal"
                 android:weightSum="10"
-                app:layout_constraintTop_toTopOf="parent">
+                app:layout_constraintTop_toTopOf="parent"
+                android:background="@color/top_main_bar">
 
                 <ImageButton
                     android:id="@+id/side_menu_btn"
                     android:layout_width="0dp"
                     android:layout_height="match_parent"
                     android:layout_weight="1"
-                    android:src="@drawable/ic_baseline_menu_temp"
+                    android:src="@drawable/ic_baseline_menu_open_gray"
                     android:scaleType="fitCenter"
                     android:adjustViewBounds="true"
                     android:layout_gravity="center_vertical"
@@ -48,7 +50,8 @@
                     android:gravity="center"
                     android:text="Gain"
                     android:textSize="30sp"
-                    android:textStyle="bold" />
+                    android:textStyle="bold"
+                    android:textColor="@color/pedalboard"/>
 
                 <com.google.android.material.slider.Slider
                     android:id="@+id/gainSlider"
@@ -57,7 +60,10 @@
                     android:layout_gravity="center"
                     android:layout_weight="7"
                     android:valueFrom="0.0"
-                    android:valueTo="10.0" />
+                    android:valueTo="10.0"
+                    app:labelBehavior="gone"
+                    app:trackColor="@color/pedalboard"
+                    app:thumbColor="@color/pedalboard"/>
 
                 <ImageButton
                     android:id="@+id/togglePower"
@@ -80,7 +86,8 @@
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:orientation="horizontal"
-                app:layout_constraintTop_toBottomOf="@+id/topLayout" />
+                app:layout_constraintTop_toBottomOf="@+id/topLayout"
+                android:layout_marginTop="5dp"/>
 
         </LinearLayout>
 

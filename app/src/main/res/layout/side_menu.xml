@@ -17,7 +17,7 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:orientation="vertical"
-            android:background="@color/white"
+            android:background="@color/side_menu_color"
             android:elevation="10dp">
 
             <LinearLayout
@@ -55,7 +55,8 @@
                         android:layout_marginEnd="24dp"
                         android:fontFamily="@font/cabin"
                         android:text="@string/header_title"
-                        android:textAppearance="?attr/textAppearanceHeadline5" />
+                        android:textAppearance="?attr/textAppearanceHeadline5"
+                        android:textColor="@color/top_main_bar"/>
 
                     <TextView
                         android:layout_width="wrap_content"
@@ -66,7 +67,7 @@
                         android:fontFamily="@font/cabin"
                         android:text="@string/header_text"
                         android:textAppearance="?attr/textAppearanceBody2"
-                        android:textColor="@color/material_on_surface_emphasis_medium" />
+                        android:textColor="@color/top_main_bar_light"/>
 
                 </LinearLayout>
 
@@ -78,7 +79,7 @@
                 android:layout_height="wrap_content"
                 android:fontFamily="@font/cabin"
                 android:orientation="vertical"
-                android:weightSum="8"
+                android:weightSum="9"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/menu_header">
 
@@ -89,13 +90,15 @@
                     android:fontFamily="@font/cabin"
                     android:text="@string/input"
                     android:layout_marginStart="24dp"
-                    android:textStyle="bold"/>
+                    android:textStyle="bold"
+                    android:textColor="@color/top_main_bar_light"/>
 
                 <com.example.giribasicamplifier.AudioDeviceSpinner
                     android:id="@+id/inputSpinner"
                     android:layout_width="260dp"
                     android:layout_height="0dp"
-                    android:layout_weight="2" />
+                    android:layout_weight="2.5"
+                    />
 
                 <TextView
                     android:layout_width="match_parent"
@@ -104,13 +107,14 @@
                     android:fontFamily="@font/cabin"
                     android:text="@string/output"
                     android:layout_marginStart="24dp"
-                    android:textStyle="bold"/>
+                    android:textStyle="bold"
+                    android:textColor="@color/top_main_bar_light"/>
 
                 <com.example.giribasicamplifier.AudioDeviceSpinner
                     android:id="@+id/outputSpinner"
                     android:layout_width="260dp"
                     android:layout_height="0dp"
-                    android:layout_weight="2" />
+                    android:layout_weight="2.5" />
 
                 <TextView
                     android:layout_width="match_parent"
@@ -119,7 +123,8 @@
                     android:fontFamily="@font/cabin"
                     android:text="@string/audio_driver"
                     android:layout_marginStart="24dp"
-                    android:textStyle="bold"/>
+                    android:textStyle="bold"
+                    android:textColor="@color/top_main_bar_light"/>
 
                 <RadioGroup
                     android:id="@+id/radioContainer"
@@ -135,14 +140,16 @@
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
-                        android:text="OpenSL ES" />
+                        android:text="OpenSL ES"
+                        android:textColor="@color/top_main_bar_light"/>
 
                     <RadioButton
                         android:id="@+id/aaudio"
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
-                        android:text="AAudio" />
+                        android:text="AAudio"
+                        android:textColor="@color/top_main_bar_light"/>
                 </RadioGroup>
 
             </LinearLayout>
@@ -151,11 +158,23 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="24dp"
-                android:layout_marginTop="24dp"
+                android:layout_marginTop="12dp"
                 android:layout_marginEnd="24dp"
                 android:fontFamily="@font/cabin"
                 android:text="@string/tutorial"
-                android:textAppearance="?attr/textAppearanceHeadline6" />
+                android:textAppearance="?attr/textAppearanceHeadline6"
+                android:textColor="@color/top_main_bar_light"/>
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_weight="0.8"
+                android:fontFamily="@font/cabin"
+                android:text="embedded YouTube Video (TODO)"
+                android:layout_marginStart="24dp"
+                android:layout_marginTop="10dp"
+                android:textStyle="bold"
+                android:textColor="@color/top_main_bar_light"/>
 
         </LinearLayout>
 
