@@ -46,8 +46,11 @@ public:
         delay = value;
     }
 
-    //stk::Delay simpleDelay = {0, 4095};
-    stk::Delay simpleDelay;
+    stk::Delay simpleDelay = {0, 4095};
+
+    void setDelayLenght(long delayLenght){
+        simpleDelay.setDelay(delayLenght);
+    }
 
     //ECHO
     bool echo = false;

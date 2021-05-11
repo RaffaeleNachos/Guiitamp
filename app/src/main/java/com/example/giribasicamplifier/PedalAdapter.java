@@ -25,6 +25,9 @@ public class PedalAdapter extends RecyclerView.Adapter<PedalAdapter.ViewHolder> 
             imageBtn.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
+                    if (pa.pedalList.get(getAdapterPosition()) instanceof BasicAmplifier){
+                        return;
+                    }
                     pa.pedalList.get(getAdapterPosition()).isActive = !pa.pedalList.get(getAdapterPosition()).isActive;
                     pa.pedalList.get(getAdapterPosition()).triggerEffect();
                     pa.notifyDataSetChanged();

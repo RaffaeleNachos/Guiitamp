@@ -84,11 +84,11 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void setUpPedalList(){
-        availablePedals.add(new Chorus(this.getDrawable(R.drawable.pedals_total_happy_01), this.getDrawable(R.drawable.pedals_total_sad_01)));
-        availablePedals.add(new Delay(this.getDrawable(R.drawable.pedals_total_happy_03), this.getDrawable(R.drawable.pedals_total_sad_03)));
-        availablePedals.add(new Reverb(this.getDrawable(R.drawable.pedals_total_happy_04), this.getDrawable(R.drawable.pedals_total_sad_04)));
-        availablePedals.add(new Echo(this.getDrawable(R.drawable.pedals_total_happy_02), this.getDrawable(R.drawable.pedals_total_sad_02)));
-        availablePedals.add(new BasicAmplifier(this.getDrawable(R.drawable.pedals_total_happy_05), this.getDrawable(R.drawable.pedals_total_sad_05)));
+        availablePedals.add(new Chorus(this.getDrawable(R.drawable.chorus_on), this.getDrawable(R.drawable.chorus_off)));
+        availablePedals.add(new Delay(this.getDrawable(R.drawable.delay_on), this.getDrawable(R.drawable.delay_off)));
+        availablePedals.add(new Reverb(this.getDrawable(R.drawable.reverb_on), this.getDrawable(R.drawable.reverb_off)));
+        availablePedals.add(new Echo(this.getDrawable(R.drawable.echo_on), this.getDrawable(R.drawable.echo_off)));
+        availablePedals.add(new BasicAmplifier(this.getDrawable(R.drawable.amp_on), this.getDrawable(R.drawable.amp_on)));
         pedalAdapter.setPedalList(availablePedals);
         pedalsBtnList.setAdapter(pedalAdapter);
     }
@@ -145,8 +145,6 @@ public class MainActivity extends AppCompatActivity {
         Log.d(APPNAME, "Stop Effect");
         LiveEffectEngine.setEffectOn(false);
         powerSwitch.setImageResource(R.drawable.ic_switch_off);
-        // set the amp off -> sad
-        availablePedals.get(availablePedals.size() - 1).isActive = false;
         pedalAdapter.notifyDataSetChanged();
         isPlaying = false;
         sideMenu.setSpinnersEnabled(true);
@@ -159,8 +157,6 @@ public class MainActivity extends AppCompatActivity {
         if (success) {
             sideMenu.setSpinnersEnabled(false);
             powerSwitch.setImageResource(R.drawable.ic_switch_on);
-            // set the amp on -> happy
-            availablePedals.get(availablePedals.size() - 1).isActive = true;
             pedalAdapter.notifyDataSetChanged();
             isPlaying = true;
         } else {

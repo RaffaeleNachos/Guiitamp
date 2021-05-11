@@ -9,14 +9,15 @@
         android:id="@+id/pedalImageButton"
         android:layout_width="0dp"
         android:layout_height="match_parent"
-        app:layout_constraintDimensionRatio="1:1"
-        android:background="@drawable/pedals_total_happy_03"
+        android:adjustViewBounds="true"
+        android:background="@drawable/reverb_on"
+        android:scaleType="fitCenter"
         app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintDimensionRatio="1:1"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        android:scaleType="fitCenter"
-        android:adjustViewBounds="true"
-        android:layout_gravity="center_vertical"/>
+        app:layout_constraintVertical_bias="1.0" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

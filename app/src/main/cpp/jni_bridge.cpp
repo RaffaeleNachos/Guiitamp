@@ -197,5 +197,19 @@ Java_com_example_giribasicamplifier_LiveEffectEngine_setReverb(JNIEnv *env, jcla
     engine->mFullDuplexPass.setReverb(value);
 }
 
+JNIEXPORT void JNICALL
+Java_com_example_giribasicamplifier_LiveEffectEngine_setDelayLenght(JNIEnv *env, jclass clazz,
+                                                               jlong value) {
+    if (engine == nullptr) {
+        LOGE(
+                "Engine is null, you must call createEngine before calling this "
+                "method");
+        return;
+    }
+
+    engine->mFullDuplexPass.simpleDelay.setDelay(value);
+}
+
+
 
 } // extern "C"
