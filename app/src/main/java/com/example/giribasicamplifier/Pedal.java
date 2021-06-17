@@ -2,8 +2,14 @@ package com.example.giribasicamplifier;
 
 import android.graphics.drawable.Drawable;
 
+import java.util.ArrayList;
+import java.util.HashMap;
+
+import it.beppi.knoblibrary.Knob;
+
 public abstract class Pedal {
 
+    public HashMap<Knob.OnStateChanged, Integer> knobs; // HashMap of type <Knob.Callback,numOfKnobStates>
     private Drawable happy;
     private Drawable sad;
     public boolean isActive = false;

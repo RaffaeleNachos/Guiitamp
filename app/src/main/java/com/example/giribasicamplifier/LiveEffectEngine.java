@@ -44,7 +44,18 @@ public enum LiveEffectEngine {
     static native void setReverb(boolean value);
     // set values
     static native void setGain(float value);
+    // Delay
     static native void setDelayLenght(long value);
+    //Reverb
+    static native void setReverbMix(float value);
+    static native void setReverbRoomSize(float value);
+    static native void setReverbMode(float value);
+    //Chorus
+    static native void setChorusDepth(float value);
+    //Echo
+    static native void setEchoTiming(long value);
+
+
 
     static void setDefaultStreamValues(Context context) {
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.JELLY_BEAN_MR1){

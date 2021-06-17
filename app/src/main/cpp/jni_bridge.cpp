@@ -210,6 +210,70 @@ Java_com_example_giribasicamplifier_LiveEffectEngine_setDelayLenght(JNIEnv *env,
     engine->mFullDuplexPass.simpleDelay.setDelay(value);
 }
 
+JNIEXPORT void JNICALL
+Java_com_example_giribasicamplifier_LiveEffectEngine_setReverbMix(JNIEnv *env, jclass clazz,
+                                                                  jfloat value) {
+    if (engine == nullptr) {
+        LOGE(
+                "Engine is null, you must call createEngine before calling this "
+                "method");
+        return;
+    }
+
+    engine->mFullDuplexPass.simpleReverb.setEffectMix(value);
+}
 
 
-} // extern "C"
+JNIEXPORT void JNICALL
+Java_com_example_giribasicamplifier_LiveEffectEngine_setReverbRoomSize(JNIEnv *env, jclass clazz,
+                                                                       jfloat value) {
+    if (engine == nullptr) {
+        LOGE(
+                "Engine is null, you must call createEngine before calling this "
+                "method");
+        return;
+    }
+
+    engine->mFullDuplexPass.simpleReverb.setRoomSize(value);
+}
+
+JNIEXPORT void JNICALL
+Java_com_example_giribasicamplifier_LiveEffectEngine_setReverbMode(JNIEnv *env, jclass clazz,
+                                                                   jfloat value) {
+    if (engine == nullptr) {
+        LOGE(
+                "Engine is null, you must call createEngine before calling this "
+                "method");
+        return;
+    }
+
+    engine->mFullDuplexPass.simpleReverb.setWidth(value);
+}
+
+JNIEXPORT void JNICALL
+Java_com_example_giribasicamplifier_LiveEffectEngine_setChorusDepth(JNIEnv *env, jclass clazz,
+                                                                    jfloat value) {
+    if (engine == nullptr) {
+        LOGE(
+                "Engine is null, you must call createEngine before calling this "
+                "method");
+        return;
+    }
+
+    engine->mFullDuplexPass.simpleChorus.setModDepth(value);
+}
+
+JNIEXPORT void JNICALL
+Java_com_example_giribasicamplifier_LiveEffectEngine_setEchoTiming(JNIEnv *env, jclass clazz,
+                                                                   jlong value) {
+    if (engine == nullptr) {
+        LOGE(
+                "Engine is null, you must call createEngine before calling this "
+                "method");
+        return;
+    }
+
+    engine->mFullDuplexPass.simpleEcho.setDelay(value);
+}
+
+}

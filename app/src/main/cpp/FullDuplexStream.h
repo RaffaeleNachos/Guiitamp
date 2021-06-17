@@ -46,11 +46,7 @@ public:
         delay = value;
     }
 
-    stk::Delay simpleDelay = {0, 4095};
-
-    void setDelayLenght(long delayLenght){
-        simpleDelay.setDelay(delayLenght);
-    }
+    stk::Delay simpleDelay = {0, 65000};
 
     //ECHO
     bool echo = false;
@@ -59,7 +55,7 @@ public:
         echo = value;
     }
 
-    stk::Echo simpleEcho;
+    stk::Echo simpleEcho = {65000};
 
     //CHORUS
     bool chorus = false;

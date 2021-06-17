@@ -9,10 +9,15 @@ import android.widget.ImageButton;
 import androidx.recyclerview.widget.RecyclerView;
 
 import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Iterator;
+
+import it.beppi.knoblibrary.Knob;
 
 public class PedalAdapter extends RecyclerView.Adapter<PedalAdapter.ViewHolder> {
 
     private ArrayList<Pedal> pedalList;
+    int [] ids = {R.id.knob_1,R.id.knob_2,R.id.knob_3};
 
     public static class ViewHolder extends RecyclerView.ViewHolder {
         private final ImageButton imageBtn;
@@ -33,6 +38,7 @@ public class PedalAdapter extends RecyclerView.Adapter<PedalAdapter.ViewHolder> 
                     pa.notifyDataSetChanged();
                 }
             });
+
         }
 
         public ImageButton getImageButton() {
@@ -65,6 +71,20 @@ public class PedalAdapter extends RecyclerView.Adapter<PedalAdapter.ViewHolder> 
             viewHolder.getImageButton().setBackground(pedalList.get(position).getHappy());
         } else {
             viewHolder.getImageButton().setBackground(pedalList.get(position).getSad());
+        }
+        if (pedalList.get(position).knobs != null){
+            HashMap map = pedalList.get(position).knobs;
+            Iterator it = map.entrySet().iterator();
+            int i = 0;
+            while (it.hasNext()) {
+                Knob knob = (Knob) viewHolder.itemView.findViewById(ids[i]);
+                knob.setVisibility(View.VISIBLE);
+                HashMap.Entry<Knob.OnStateChanged, Integer> pair = (HashMap.Entry)it.next();
+                knob.setOnStateChanged(pair.getKey());
+                knob.setNumberOfStates(pair.getValue());
+                it.remove();
+                i++;
+            }
         }
     }
 
