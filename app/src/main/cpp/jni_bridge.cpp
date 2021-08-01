@@ -198,8 +198,8 @@ Java_com_example_giribasicamplifier_LiveEffectEngine_setReverb(JNIEnv *env, jcla
 }
 
 JNIEXPORT void JNICALL
-Java_com_example_giribasicamplifier_LiveEffectEngine_setDelayLenght(JNIEnv *env, jclass clazz,
-                                                               jlong value) {
+Java_com_example_giribasicamplifier_LiveEffectEngine_setDelayTime(JNIEnv *env, jclass clazz,
+                                                               jdouble value) {
     if (engine == nullptr) {
         LOGE(
                 "Engine is null, you must call createEngine before calling this "
@@ -208,6 +208,20 @@ Java_com_example_giribasicamplifier_LiveEffectEngine_setDelayLenght(JNIEnv *env,
     }
 
     engine->mFullDuplexPass.simpleDelay.setDelay(value);
+}
+
+JNIEXPORT void JNICALL
+Java_com_example_giribasicamplifier_LiveEffectEngine_setDelayTransitionTime(JNIEnv *env, jclass clazz,
+        jdouble value) {
+    if (engine == nullptr) {
+        LOGE(
+                "Engine is null, you must call createEngine before calling this "
+                "method");
+        return;
+    }
+
+    //engine->mFullDuplexPass.simpleDelay.setDelayTransitionTime(value);
+
 }
 
 JNIEXPORT void JNICALL
@@ -261,6 +275,19 @@ Java_com_example_giribasicamplifier_LiveEffectEngine_setChorusDepth(JNIEnv *env,
     }
 
     engine->mFullDuplexPass.simpleChorus.setModDepth(value);
+}
+
+JNIEXPORT void JNICALL
+Java_com_example_giribasicamplifier_LiveEffectEngine_setModFrequency(JNIEnv *env, jclass clazz,
+                                                                    jfloat value) {
+    if (engine == nullptr) {
+        LOGE(
+                "Engine is null, you must call createEngine before calling this "
+                "method");
+        return;
+    }
+
+    engine->mFullDuplexPass.simpleChorus.setModFrequency(value);
 }
 
 JNIEXPORT void JNICALL

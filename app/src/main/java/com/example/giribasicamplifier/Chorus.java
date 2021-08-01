@@ -14,9 +14,25 @@ public class Chorus extends Pedal {
         knobs.put(new Knob.OnStateChanged() {
             @Override
             public void onState(int state) {
-                LiveEffectEngine.setChorusDepth((float) (state / 10.0));
+                LiveEffectEngine.setChorusDepth((float) (state / 100.0));
             }
         }, 10);
+        knobs.put(new Knob.OnStateChanged() {
+            @Override
+            public void onState(int state) {
+                LiveEffectEngine.setModFrequency((float) (1 * state));
+            }
+        }, 10);
+    }
+
+    @Override
+    public float getKnobX() {
+        return 0;
+    }
+
+    @Override
+    public float getKnobY() {
+        return 60;
     }
 
     public void triggerEffect(){

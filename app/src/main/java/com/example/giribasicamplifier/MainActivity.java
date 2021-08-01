@@ -18,6 +18,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import android.util.Log;
 
 import android.view.View;
+import android.view.WindowManager;
 import android.widget.ImageButton;
 import android.widget.Toast;
 
@@ -43,6 +44,7 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_LANDSCAPE);
+        getWindow().addFlags(WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON);
 
         sideMenu = new SideMenu();
 
@@ -53,6 +55,8 @@ public class MainActivity extends AppCompatActivity {
                 getSupportFragmentManager().beginTransaction().add(R.id.side_menu_fragment, new SideMenu()).commit();
             }
         });
+
+        checkPermission( Manifest.permission.RECORD_AUDIO, AUDIO_PERMISSION_CODE);
 
         // set up pedals list view with supported Pedals
         pedalsBtnList = findViewById(R.id.pedalsList);
@@ -65,14 +69,12 @@ public class MainActivity extends AppCompatActivity {
         powerSwitch.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                checkPermission(
-                        Manifest.permission.RECORD_AUDIO,
-                        AUDIO_PERMISSION_CODE);
                 toggleEffect();
             }
         });
 
         gainSlider = findViewById(R.id.gainSlider);
+        gainSlider.setValue(1);
         gainSlider.addOnChangeListener(new Slider.OnChangeListener() {
             @Override
             public void onValueChange(@NonNull Slider slider, float value, boolean fromUser) {
@@ -102,10 +104,10 @@ public class MainActivity extends AppCompatActivity {
                     new String[]{permission},
                     requestCode);
         } else {
-            Toast.makeText(MainActivity.this,
-                    "Permission already granted",
-                    Toast.LENGTH_SHORT)
-                    .show();
+//            Toast.makeText(MainActivity.this,
+//                    "Permission already granted",
+//                    Toast.LENGTH_SHORT)
+//                    .show();
         }
     }
 

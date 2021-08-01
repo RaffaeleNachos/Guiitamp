@@ -14,9 +14,19 @@ public class Echo extends Pedal{
         knobs.put(new Knob.OnStateChanged() {
             @Override
             public void onState(int state) {
-                LiveEffectEngine.setEchoTiming((65000 / 40) * state);
+                LiveEffectEngine.setEchoTiming(state * 5510);
             }
         }, 40);
+    }
+
+    @Override
+    public float getKnobX() {
+        return 0;
+    }
+
+    @Override
+    public float getKnobY() {
+        return 200;
     }
 
     public void triggerEffect(){

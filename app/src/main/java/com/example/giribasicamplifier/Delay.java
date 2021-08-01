@@ -14,9 +14,25 @@ public class Delay extends Pedal {
         knobs.put(new Knob.OnStateChanged() {
             @Override
             public void onState(int state) {
-                LiveEffectEngine.setDelayLenght((65000 / 40) * state);
+                LiveEffectEngine.setDelayTime(state * 5510);
             }
         }, 40);
+        /*knobs.put(new Knob.OnStateChanged() {
+            @Override
+            public void onState(int state) {
+                LiveEffectEngine.setDelayTransitionTime(state * 5510);
+            }
+        }, 40);*/
+    }
+
+    @Override
+    public float getKnobX() {
+        return 0;
+    }
+
+    @Override
+    public float getKnobY() {
+        return 20;
     }
 
     public void triggerEffect(){

@@ -4,8 +4,10 @@ import android.graphics.drawable.Drawable;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.GridLayout;
 import android.widget.ImageButton;
 
+import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.recyclerview.widget.RecyclerView;
 
 import java.util.ArrayList;
@@ -73,6 +75,9 @@ public class PedalAdapter extends RecyclerView.Adapter<PedalAdapter.ViewHolder> 
             viewHolder.getImageButton().setBackground(pedalList.get(position).getSad());
         }
         if (pedalList.get(position).knobs != null){
+            ConstraintLayout constraintLayout = viewHolder.itemView.findViewById(R.id.pedal_knobs_container);
+            constraintLayout.setX(pedalList.get(position).getKnobX());
+            constraintLayout.setY(pedalList.get(position).getKnobY());
             HashMap map = pedalList.get(position).knobs;
             Iterator it = map.entrySet().iterator();
             int i = 0;

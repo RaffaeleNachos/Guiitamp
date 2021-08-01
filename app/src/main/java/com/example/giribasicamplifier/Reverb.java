@@ -2,7 +2,6 @@ package com.example.giribasicamplifier;
 
 import android.graphics.drawable.Drawable;
 
-import java.util.ArrayList;
 import java.util.HashMap;
 
 import it.beppi.knoblibrary.Knob;
@@ -30,6 +29,16 @@ public class Reverb extends Pedal {
                 LiveEffectEngine.setReverbMode((float) (state / 10.0));
             }
         }, 10);
+    }
+
+    @Override
+    public float getKnobX() {
+        return -10;
+    }
+
+    @Override
+    public float getKnobY() {
+        return -20;
     }
 
     public void triggerEffect(){

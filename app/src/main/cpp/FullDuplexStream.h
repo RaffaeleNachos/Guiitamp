@@ -46,7 +46,7 @@ public:
         delay = value;
     }
 
-    stk::Delay simpleDelay = {0, 65000};
+    stk::Delay simpleDelay = {44100 * 2, 44100 * 10};
 
     //ECHO
     bool echo = false;
@@ -55,7 +55,7 @@ public:
         echo = value;
     }
 
-    stk::Echo simpleEcho = {65000};
+    stk::Echo simpleEcho = {44100 * 10};
 
     //CHORUS
     bool chorus = false;

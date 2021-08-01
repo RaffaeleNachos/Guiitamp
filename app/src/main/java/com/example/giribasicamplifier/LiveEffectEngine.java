@@ -45,13 +45,15 @@ public enum LiveEffectEngine {
     // set values
     static native void setGain(float value);
     // Delay
-    static native void setDelayLenght(long value);
+    static native void setDelayTime(double value);
+    static native void setDelayTransitionTime(double value);
     //Reverb
     static native void setReverbMix(float value);
     static native void setReverbRoomSize(float value);
     static native void setReverbMode(float value);
     //Chorus
     static native void setChorusDepth(float value);
+    static native void setModFrequency(float value);
     //Echo
     static native void setEchoTiming(long value);
 

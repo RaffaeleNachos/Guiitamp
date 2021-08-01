@@ -2,7 +2,6 @@ package com.example.giribasicamplifier;
 
 import android.graphics.drawable.Drawable;
 
-import java.util.ArrayList;
 import java.util.HashMap;
 
 import it.beppi.knoblibrary.Knob;
@@ -34,6 +33,10 @@ public abstract class Pedal {
     public Drawable getSad() {
         return sad;
     }
+
+    public abstract float getKnobX();
+
+    public abstract float getKnobY();
 
     abstract public void triggerEffect();
 

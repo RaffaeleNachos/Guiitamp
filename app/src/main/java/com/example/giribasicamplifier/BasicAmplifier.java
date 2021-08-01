@@ -9,6 +9,16 @@ public class BasicAmplifier extends Pedal{
     }
 
     @Override
+    public float getKnobX() {
+        return 0;
+    }
+
+    @Override
+    public float getKnobY() {
+        return 0;
+    }
+
+    @Override
     public void triggerEffect() {
         return;
     }
