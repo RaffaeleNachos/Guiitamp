@@ -86,11 +86,10 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void setUpPedalList(){
-        availablePedals.add(new Chorus(this.getDrawable(R.drawable.chorus_on), this.getDrawable(R.drawable.chorus_off)));
-        availablePedals.add(new Delay(this.getDrawable(R.drawable.delay_on), this.getDrawable(R.drawable.delay_off)));
-        availablePedals.add(new Reverb(this.getDrawable(R.drawable.reverb_on), this.getDrawable(R.drawable.reverb_off)));
-        availablePedals.add(new Echo(this.getDrawable(R.drawable.echo_on), this.getDrawable(R.drawable.echo_off)));
-        availablePedals.add(new BasicAmplifier(this.getDrawable(R.drawable.amp_on), this.getDrawable(R.drawable.amp_on)));
+        availablePedals.add(new Chorus(this.getDrawable(R.drawable.chorus)));
+        availablePedals.add(new Delay(this.getDrawable(R.drawable.delay)));
+        availablePedals.add(new Reverb(this.getDrawable(R.drawable.reverb)));
+        availablePedals.add(new Echo(this.getDrawable(R.drawable.echo)));
         pedalAdapter.setPedalList(availablePedals);
         pedalsBtnList.setAdapter(pedalAdapter);
     }

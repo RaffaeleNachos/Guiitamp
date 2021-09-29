@@ -9,34 +9,16 @@ import it.beppi.knoblibrary.Knob;
 public abstract class Pedal {
 
     public HashMap<Knob.OnStateChanged, Integer> knobs; // HashMap of type <Knob.Callback,numOfKnobStates>
-    private Drawable happy;
-    private Drawable sad;
+    private Drawable pedalImg;
     public boolean isActive = false;
 
-    public Pedal(Drawable happy, Drawable sad){
-        this.happy = happy;
-        this.sad = sad;
+    public Pedal(Drawable pedalImg){
+        this.pedalImg = pedalImg;
     }
 
-    public void setHappy(Drawable happy) {
-        this.happy = happy;
+    public Drawable getPedalImg() {
+        return pedalImg;
     }
-
-    public void setSad(Drawable sad) {
-        this.sad = sad;
-    }
-
-    public Drawable getHappy() {
-        return happy;
-    }
-
-    public Drawable getSad() {
-        return sad;
-    }
-
-    public abstract float getKnobX();
-
-    public abstract float getKnobY();
 
     abstract public void triggerEffect();
 

@@ -8,8 +8,8 @@ import it.beppi.knoblibrary.Knob;
 
 public class Chorus extends Pedal {
 
-    public Chorus(Drawable happy, Drawable sad) {
-        super(happy, sad);
+    public Chorus(Drawable pedalImg) {
+        super(pedalImg);
         this.knobs = new HashMap<>();
         knobs.put(new Knob.OnStateChanged() {
             @Override
@@ -23,16 +23,6 @@ public class Chorus extends Pedal {
                 LiveEffectEngine.setModFrequency((float) (1 * state));
             }
         }, 10);
-    }
-
-    @Override
-    public float getKnobX() {
-        return 0;
-    }
-
-    @Override
-    public float getKnobY() {
-        return 60;
     }
 
     public void triggerEffect(){

@@ -8,8 +8,8 @@ import it.beppi.knoblibrary.Knob;
 
 public class Echo extends Pedal{
 
-    public Echo(Drawable happy, Drawable sad) {
-        super(happy, sad);
+    public Echo(Drawable pedalImg) {
+        super(pedalImg);
         this.knobs = new HashMap<>();
         knobs.put(new Knob.OnStateChanged() {
             @Override
@@ -17,16 +17,6 @@ public class Echo extends Pedal{
                 LiveEffectEngine.setEchoTiming(state * 5510);
             }
         }, 40);
-    }
-
-    @Override
-    public float getKnobX() {
-        return 0;
-    }
-
-    @Override
-    public float getKnobY() {
-        return 200;
     }
 
     public void triggerEffect(){

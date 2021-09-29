@@ -8,8 +8,8 @@ import it.beppi.knoblibrary.Knob;
 
 public class Reverb extends Pedal {
 
-    public Reverb(Drawable happy, Drawable sad) {
-        super(happy, sad);
+    public Reverb(Drawable pedalImg) {
+        super(pedalImg);
         this.knobs = new HashMap<>();
         knobs.put(new Knob.OnStateChanged() {
             @Override
@@ -29,16 +29,6 @@ public class Reverb extends Pedal {
                 LiveEffectEngine.setReverbMode((float) (state / 10.0));
             }
         }, 10);
-    }
-
-    @Override
-    public float getKnobX() {
-        return -10;
-    }
-
-    @Override
-    public float getKnobY() {
-        return -20;
     }
 
     public void triggerEffect(){

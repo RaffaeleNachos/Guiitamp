@@ -6,6 +6,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.GridLayout;
 import android.widget.ImageButton;
+import android.widget.ImageView;
 
 import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.recyclerview.widget.RecyclerView;
@@ -32,9 +33,6 @@ public class PedalAdapter extends RecyclerView.Adapter<PedalAdapter.ViewHolder> 
             imageBtn.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    if (pa.pedalList.get(getAdapterPosition()) instanceof BasicAmplifier){
-                        return;
-                    }
                     pa.pedalList.get(getAdapterPosition()).isActive = !pa.pedalList.get(getAdapterPosition()).isActive;
                     pa.pedalList.get(getAdapterPosition()).triggerEffect();
                     pa.notifyDataSetChanged();
@@ -69,22 +67,24 @@ public class PedalAdapter extends RecyclerView.Adapter<PedalAdapter.ViewHolder> 
 
         // Get element from your dataset at this position and replace the
         // contents of the view with that element
+        viewHolder.getImageButton().setBackground(pedalList.get(position).getPedalImg());
+        // Set the led on or off
+        ImageView ledImg = viewHolder.itemView.findViewById(R.id.led);
         if (pedalList.get(position).isActive) {
-            viewHolder.getImageButton().setBackground(pedalList.get(position).getHappy());
+            ledImg.setImageResource(R.drawable.led_on);
         } else {
-            viewHolder.getImageButton().setBackground(pedalList.get(position).getSad());
+            ledImg.setImageResource(R.drawable.led_off);
         }
+        // Populate the Knobs for every pedal
         if (pedalList.get(position).knobs != null){
             ConstraintLayout constraintLayout = viewHolder.itemView.findViewById(R.id.pedal_knobs_container);
-            constraintLayout.setX(pedalList.get(position).getKnobX());
-            constraintLayout.setY(pedalList.get(position).getKnobY());
             HashMap map = pedalList.get(position).knobs;
             Iterator it = map.entrySet().iterator();
             int i = 0;
             while (it.hasNext()) {
                 Knob knob = (Knob) viewHolder.itemView.findViewById(ids[i]);
                 knob.setVisibility(View.VISIBLE);
-                HashMap.Entry<Knob.OnStateChanged, Integer> pair = (HashMap.Entry)it.next();
+                HashMap.Entry<Knob.OnStateChanged, Integer> pair = (HashMap.Entry) it.next();
                 knob.setOnStateChanged(pair.getKey());
                 knob.setNumberOfStates(pair.getValue());
                 it.remove();

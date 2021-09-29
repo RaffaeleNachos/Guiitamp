@@ -8,8 +8,8 @@ import it.beppi.knoblibrary.Knob;
 
 public class Delay extends Pedal {
 
-    public Delay(Drawable happy, Drawable sad) {
-        super(happy, sad);
+    public Delay(Drawable pedalImg) {
+        super(pedalImg);
         this.knobs = new HashMap<>();
         knobs.put(new Knob.OnStateChanged() {
             @Override
@@ -23,16 +23,6 @@ public class Delay extends Pedal {
                 LiveEffectEngine.setDelayTransitionTime(state * 5510);
             }
         }, 40);*/
-    }
-
-    @Override
-    public float getKnobX() {
-        return 0;
-    }
-
-    @Override
-    public float getKnobY() {
-        return 20;
     }
 
     public void triggerEffect(){
