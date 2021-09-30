@@ -211,8 +211,8 @@ Java_com_example_giribasicamplifier_LiveEffectEngine_setDelayTime(JNIEnv *env, j
 }
 
 JNIEXPORT void JNICALL
-Java_com_example_giribasicamplifier_LiveEffectEngine_setDelayTransitionTime(JNIEnv *env, jclass clazz,
-        jdouble value) {
+Java_com_example_giribasicamplifier_LiveEffectEngine_setReverbDamping(JNIEnv *env, jclass clazz,
+                                                                      jfloat value) {
     if (engine == nullptr) {
         LOGE(
                 "Engine is null, you must call createEngine before calling this "
@@ -220,21 +220,7 @@ Java_com_example_giribasicamplifier_LiveEffectEngine_setDelayTransitionTime(JNIE
         return;
     }
 
-    //engine->mFullDuplexPass.simpleDelay.setDelayTransitionTime(value);
-
-}
-
-JNIEXPORT void JNICALL
-Java_com_example_giribasicamplifier_LiveEffectEngine_setReverbMix(JNIEnv *env, jclass clazz,
-                                                                  jfloat value) {
-    if (engine == nullptr) {
-        LOGE(
-                "Engine is null, you must call createEngine before calling this "
-                "method");
-        return;
-    }
-
-    engine->mFullDuplexPass.simpleReverb.setEffectMix(value);
+    engine->mFullDuplexPass.simpleReverb.setDamping(value);
 }
 
 
@@ -265,8 +251,8 @@ Java_com_example_giribasicamplifier_LiveEffectEngine_setReverbMode(JNIEnv *env, 
 }
 
 JNIEXPORT void JNICALL
-Java_com_example_giribasicamplifier_LiveEffectEngine_setChorusDepth(JNIEnv *env, jclass clazz,
-                                                                    jfloat value) {
+Java_com_example_giribasicamplifier_LiveEffectEngine_setChorusModDepth(JNIEnv *env, jclass clazz,
+                                                                       jfloat value) {
     if (engine == nullptr) {
         LOGE(
                 "Engine is null, you must call createEngine before calling this "
@@ -278,8 +264,8 @@ Java_com_example_giribasicamplifier_LiveEffectEngine_setChorusDepth(JNIEnv *env,
 }
 
 JNIEXPORT void JNICALL
-Java_com_example_giribasicamplifier_LiveEffectEngine_setModFrequency(JNIEnv *env, jclass clazz,
-                                                                    jfloat value) {
+Java_com_example_giribasicamplifier_LiveEffectEngine_setChorusModFrequency(JNIEnv *env, jclass clazz,
+                                                                           jfloat value) {
     if (engine == nullptr) {
         LOGE(
                 "Engine is null, you must call createEngine before calling this "
@@ -291,8 +277,8 @@ Java_com_example_giribasicamplifier_LiveEffectEngine_setModFrequency(JNIEnv *env
 }
 
 JNIEXPORT void JNICALL
-Java_com_example_giribasicamplifier_LiveEffectEngine_setEchoTiming(JNIEnv *env, jclass clazz,
-                                                                   jlong value) {
+Java_com_example_giribasicamplifier_LiveEffectEngine_setEchoDelay(JNIEnv *env, jclass clazz,
+                                                                  jlong value) {
     if (engine == nullptr) {
         LOGE(
                 "Engine is null, you must call createEngine before calling this "

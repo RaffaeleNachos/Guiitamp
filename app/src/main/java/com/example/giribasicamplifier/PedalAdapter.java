@@ -84,9 +84,11 @@ public class PedalAdapter extends RecyclerView.Adapter<PedalAdapter.ViewHolder> 
             while (it.hasNext()) {
                 Knob knob = (Knob) viewHolder.itemView.findViewById(ids[i]);
                 knob.setVisibility(View.VISIBLE);
-                HashMap.Entry<Knob.OnStateChanged, Integer> pair = (HashMap.Entry) it.next();
+                HashMap.Entry<Knob.OnStateChanged, Pedal.PedalStatesInfo> pair = (HashMap.Entry) it.next();
                 knob.setOnStateChanged(pair.getKey());
-                knob.setNumberOfStates(pair.getValue());
+                Pedal.PedalStatesInfo infos = pair.getValue();
+                knob.setNumberOfStates(infos.numOfStates);
+                knob.setState(infos.initialState, true);
                 it.remove();
                 i++;
             }

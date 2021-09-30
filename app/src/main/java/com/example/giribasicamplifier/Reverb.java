@@ -14,21 +14,21 @@ public class Reverb extends Pedal {
         knobs.put(new Knob.OnStateChanged() {
             @Override
             public void onState(int state) {
-                LiveEffectEngine.setReverbMix((float) (state / 10.0));
+                LiveEffectEngine.setReverbDamping((float) (state * 0.05));
             }
-        }, 10);
+        }, new PedalStatesInfo(20,5)); // StockValue: 0.25   Range: 0 -> 1
         knobs.put(new Knob.OnStateChanged() {
             @Override
             public void onState(int state) {
-                LiveEffectEngine.setReverbRoomSize((float) (state / 10.0));
+                LiveEffectEngine.setReverbRoomSize((float) (state * 0.05));
             }
-        }, 10);
+        }, new PedalStatesInfo(20,15)); // StockValue: 0.75  Range: 0 -> 1
         knobs.put(new Knob.OnStateChanged() {
             @Override
             public void onState(int state) {
-                LiveEffectEngine.setReverbMode((float) (state / 10.0));
+                LiveEffectEngine.setReverbMode((float) (state * 0.05));
             }
-        }, 10);
+        }, new PedalStatesInfo(20,20)); // StockValue: 1.0   Range: 0 -> 1
     }
 
     public void triggerEffect(){

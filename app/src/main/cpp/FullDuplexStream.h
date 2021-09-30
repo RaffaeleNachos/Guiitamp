@@ -46,21 +46,23 @@ public:
         delay = value;
     }
 
-    stk::Delay simpleDelay = {44100 * 2, 44100 * 10};
+    stk::Delay simpleDelay = {44100 * 1, 44100 * 5};
 
     //ECHO
     bool echo = false;
 
     void setEcho(bool value){
+        if (!value) simpleEcho.clear();
         echo = value;
     }
 
-    stk::Echo simpleEcho = {44100 * 10};
+    stk::Echo simpleEcho = {44100 * 5}; // remove hardcoded 44100 and ask for real sampling freq.
 
     //CHORUS
     bool chorus = false;
 
     void setChorus(bool value){
+        if (!value) simpleChorus.clear();
         chorus = value;
     }
 
