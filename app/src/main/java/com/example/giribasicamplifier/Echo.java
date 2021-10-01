@@ -16,7 +16,7 @@ public class Echo extends Pedal{
             public void onState(int state) {
                 LiveEffectEngine.setEchoDelay((long) (state * 11025));
             }
-        }, new PedalStatesInfo(20,10)); // StockValue: (44100 * 2.5)   Range: 0 -> (44100 * 5)
+        }, new PedalInfo(20,10,"DELAY")); // StockValue: (44100 * 2.5)   Range: 0 -> (44100 * 5)
     }
 
     public void triggerEffect(){

@@ -6,7 +6,7 @@
         <entry key="app/src/main/res/layout/activity_main.xml" value="0.2604166666666667" />
         <entry key="app/src/main/res/layout/audio_devices.xml" value="0.2604166666666667" />
         <entry key="app/src/main/res/layout/header_navigation_drawer.xml" value="0.2604166666666667" />
-        <entry key="app/src/main/res/layout/knobs_container.xml" value="0.25" />
+        <entry key="app/src/main/res/layout/knobs_container.xml" value="0.5" />
         <entry key="app/src/main/res/layout/pedal_item.xml" value="0.21197916666666666" />
       </map>
     </option>

@@ -8,7 +8,7 @@ import it.beppi.knoblibrary.Knob;
 
 public abstract class Pedal {
 
-    public HashMap<Knob.OnStateChanged, PedalStatesInfo> knobs; // HashMap of type <Knob.Callback,PedalStatesInfo>
+    public HashMap<Knob.OnStateChanged, PedalInfo> knobs; // HashMap of type <Knob.Callback,PedalStatesInfo>
     private Drawable pedalImg;
     public boolean isActive = false;
 
@@ -22,13 +22,15 @@ public abstract class Pedal {
 
     abstract public void triggerEffect();
 
-    public class PedalStatesInfo{
+    public class PedalInfo {
         public Integer numOfStates;
         public Integer initialState;
+        public String controlName;
 
-        PedalStatesInfo(Integer numOfStates, Integer initialState){
+        PedalInfo(Integer numOfStates, Integer initialState, String controlName){
             this.initialState = initialState;
             this.numOfStates = numOfStates;
+            this.controlName = controlName;
         }
     }
 

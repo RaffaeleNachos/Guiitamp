@@ -31,44 +31,86 @@
             android:layout_height="wrap_content"
             android:orientation="horizontal">
 
-            <it.beppi.knoblibrary.Knob
-                android:id="@+id/knob_1"
-                android:layout_width="55dp"
-                android:layout_height="55dp"
-                android:visibility="gone"
-                android:layout_marginHorizontal="5dp"
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
+                <it.beppi.knoblibrary.Knob
+                    android:id="@+id/knob_1"
+                    android:layout_width="55dp"
+                    android:layout_height="55dp"
+                    android:visibility="gone"
+                    android:layout_marginHorizontal="5dp"
 
-                app:kFreeRotation="false"
-                app:kKnobColor="@color/pedalboard_dark"
-                app:kMaxAngle="130"
-                app:kMinAngle="-130"
-                app:kStateMarkersColor="@color/white" />
+                    app:kFreeRotation="false"
+                    app:kKnobColor="@color/pedalboard_dark"
+                    app:kMaxAngle="130"
+                    app:kMinAngle="-130"
+                    app:kStateMarkersColor="@color/white" />
+                <TextView
+                    android:id="@+id/knob_text_1"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:textStyle="bold"
+                    android:textColor="@color/black"
+                    android:textAllCaps="true"
+                    android:textSize="10dp"/>
+            </LinearLayout>
 
-            <it.beppi.knoblibrary.Knob
-                android:id="@+id/knob_2"
-                android:layout_width="55dp"
-                android:layout_height="55dp"
-                android:visibility="gone"
-                android:layout_marginHorizontal="5dp"
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
+                <it.beppi.knoblibrary.Knob
+                    android:id="@+id/knob_2"
+                    android:layout_width="55dp"
+                    android:layout_height="55dp"
+                    android:visibility="gone"
+                    android:layout_marginHorizontal="5dp"
 
-                app:kFreeRotation="false"
-                app:kKnobColor="@color/pedalboard_dark"
-                app:kMaxAngle="130"
-                app:kMinAngle="-130"
-                app:kStateMarkersColor="@color/white" />
+                    app:kFreeRotation="false"
+                    app:kKnobColor="@color/pedalboard_dark"
+                    app:kMaxAngle="130"
+                    app:kMinAngle="-130"
+                    app:kStateMarkersColor="@color/white" />
+                <TextView
+                    android:id="@+id/knob_text_2"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:textStyle="bold"
+                    android:textColor="@color/black"
+                    android:textAllCaps="true"
+                    android:textSize="10dp"/>
+            </LinearLayout>
 
-            <it.beppi.knoblibrary.Knob
-                android:id="@+id/knob_3"
-                android:layout_width="55dp"
-                android:layout_height="55dp"
-                android:visibility="gone"
-                android:layout_marginHorizontal="5dp"
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
+                <it.beppi.knoblibrary.Knob
+                    android:id="@+id/knob_3"
+                    android:layout_width="55dp"
+                    android:layout_height="55dp"
+                    android:visibility="gone"
+                    android:layout_marginHorizontal="5dp"
 
-                app:kFreeRotation="false"
-                app:kKnobColor="@color/pedalboard_dark"
-                app:kMaxAngle="130"
-                app:kMinAngle="-130"
-                app:kStateMarkersColor="@color/white" />
+                    app:kFreeRotation="false"
+                    app:kKnobColor="@color/pedalboard_dark"
+                    app:kMaxAngle="130"
+                    app:kMinAngle="-130"
+                    app:kStateMarkersColor="@color/white" />
+                <TextView
+                    android:id="@+id/knob_text_3"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:textStyle="bold"
+                    android:textColor="@color/black"
+                    android:textAllCaps="true"
+                    android:textSize="10dp"/>
+            </LinearLayout>
         </LinearLayout>
     </LinearLayout>
 

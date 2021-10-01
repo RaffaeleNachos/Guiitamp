@@ -16,7 +16,7 @@ public class Delay extends Pedal {
             public void onState(int state) {
                 LiveEffectEngine.setDelayTime(state * 11025);
             }
-        }, new PedalStatesInfo(20,4)); // StockValue: (44100 * 1)   Range: 0 -> (44100 * 5)
+        }, new PedalInfo(20,4, "TIME")); // StockValue: (44100 * 1)   Range: 0 -> (44100 * 5)
     }
 
     public void triggerEffect(){

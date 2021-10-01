@@ -1,12 +1,11 @@
 package com.example.giribasicamplifier;
 
-import android.graphics.drawable.Drawable;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.GridLayout;
 import android.widget.ImageButton;
 import android.widget.ImageView;
+import android.widget.TextView;
 
 import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.recyclerview.widget.RecyclerView;
@@ -20,7 +19,9 @@ import it.beppi.knoblibrary.Knob;
 public class PedalAdapter extends RecyclerView.Adapter<PedalAdapter.ViewHolder> {
 
     private ArrayList<Pedal> pedalList;
-    int [] ids = {R.id.knob_1,R.id.knob_2,R.id.knob_3};
+    int [] knobIds = {R.id.knob_1,R.id.knob_2,R.id.knob_3};
+    int [] textIds = {R.id.knob_text_1,R.id.knob_text_2,R.id.knob_text_3};
+
 
     public static class ViewHolder extends RecyclerView.ViewHolder {
         private final ImageButton imageBtn;
@@ -82,13 +83,15 @@ public class PedalAdapter extends RecyclerView.Adapter<PedalAdapter.ViewHolder> 
             Iterator it = map.entrySet().iterator();
             int i = 0;
             while (it.hasNext()) {
-                Knob knob = (Knob) viewHolder.itemView.findViewById(ids[i]);
+                Knob knob = (Knob) viewHolder.itemView.findViewById(knobIds[i]);
                 knob.setVisibility(View.VISIBLE);
-                HashMap.Entry<Knob.OnStateChanged, Pedal.PedalStatesInfo> pair = (HashMap.Entry) it.next();
+                HashMap.Entry<Knob.OnStateChanged, Pedal.PedalInfo> pair = (HashMap.Entry) it.next();
                 knob.setOnStateChanged(pair.getKey());
-                Pedal.PedalStatesInfo infos = pair.getValue();
+                Pedal.PedalInfo infos = pair.getValue();
                 knob.setNumberOfStates(infos.numOfStates);
                 knob.setState(infos.initialState, true);
+                TextView tv = viewHolder.itemView.findViewById(textIds[i]);
+                tv.setText(infos.controlName);
                 it.remove();
                 i++;
             }
