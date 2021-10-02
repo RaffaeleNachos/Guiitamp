@@ -1,4 +1,4 @@
-package com.example.giribasicamplifier;
+package com.example.guiitamp;
 
 import android.Manifest;
 import android.content.pm.ActivityInfo;
@@ -20,7 +20,6 @@ import android.util.Log;
 import android.view.View;
 import android.view.WindowManager;
 import android.widget.ImageButton;
-import android.widget.Toast;
 
 import java.util.ArrayList;
 

@@ -6,7 +6,7 @@
     app:startDestination="@id/mainActivity">
     <activity
         android:id="@+id/mainActivity"
-        android:name="com.example.giribasicamplifier.MainActivity"
+        android:name="com.example.guiitamp.MainActivity"
         android:label="activity_main"
         tools:layout="@layout/activity_main" />
 </navigation>

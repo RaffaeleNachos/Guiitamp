@@ -26,7 +26,7 @@ static LiveEffectEngine *engine = nullptr;
 extern "C" {
 
 JNIEXPORT jboolean JNICALL
-Java_com_example_giribasicamplifier_LiveEffectEngine_create(JNIEnv *env,
+Java_com_example_guiitamp_LiveEffectEngine_create(JNIEnv *env,
                                                                jclass) {
     if (engine == nullptr) {
         engine = new LiveEffectEngine();
@@ -36,7 +36,7 @@ Java_com_example_giribasicamplifier_LiveEffectEngine_create(JNIEnv *env,
 }
 
 JNIEXPORT void JNICALL
-Java_com_example_giribasicamplifier_LiveEffectEngine_delete(JNIEnv *env,
+Java_com_example_guiitamp_LiveEffectEngine_delete(JNIEnv *env,
                                                                jclass) {
     if (engine) {
         engine->setEffectOn(false);
@@ -46,7 +46,7 @@ Java_com_example_giribasicamplifier_LiveEffectEngine_delete(JNIEnv *env,
 }
 
 JNIEXPORT jboolean JNICALL
-Java_com_example_giribasicamplifier_LiveEffectEngine_setEffectOn(
+Java_com_example_guiitamp_LiveEffectEngine_setEffectOn(
     JNIEnv *env, jclass, jboolean isEffectOn) {
     if (engine == nullptr) {
         LOGE(
@@ -59,7 +59,7 @@ Java_com_example_giribasicamplifier_LiveEffectEngine_setEffectOn(
 }
 
 JNIEXPORT void JNICALL
-Java_com_example_giribasicamplifier_LiveEffectEngine_setRecordingDeviceId(
+Java_com_example_guiitamp_LiveEffectEngine_setRecordingDeviceId(
     JNIEnv *env, jclass, jint deviceId) {
     if (engine == nullptr) {
         LOGE(
@@ -72,7 +72,7 @@ Java_com_example_giribasicamplifier_LiveEffectEngine_setRecordingDeviceId(
 }
 
 JNIEXPORT void JNICALL
-Java_com_example_giribasicamplifier_LiveEffectEngine_setPlaybackDeviceId(
+Java_com_example_guiitamp_LiveEffectEngine_setPlaybackDeviceId(
     JNIEnv *env, jclass, jint deviceId) {
     if (engine == nullptr) {
         LOGE(
@@ -85,7 +85,7 @@ Java_com_example_giribasicamplifier_LiveEffectEngine_setPlaybackDeviceId(
 }
 
 JNIEXPORT jboolean JNICALL
-Java_com_example_giribasicamplifier_LiveEffectEngine_setAPI(JNIEnv *env,
+Java_com_example_guiitamp_LiveEffectEngine_setAPI(JNIEnv *env,
                                                                jclass type,
                                                                jint apiType) {
     if (engine == nullptr) {
@@ -112,7 +112,7 @@ Java_com_example_giribasicamplifier_LiveEffectEngine_setAPI(JNIEnv *env,
 }
 
 JNIEXPORT jboolean JNICALL
-Java_com_example_giribasicamplifier_LiveEffectEngine_isAAudioRecommended(
+Java_com_example_guiitamp_LiveEffectEngine_isAAudioRecommended(
     JNIEnv *env, jclass type) {
     if (engine == nullptr) {
         LOGE(
@@ -124,7 +124,7 @@ Java_com_example_giribasicamplifier_LiveEffectEngine_isAAudioRecommended(
 }
 
 JNIEXPORT void JNICALL
-Java_com_example_giribasicamplifier_LiveEffectEngine_native_1setDefaultStreamValues(JNIEnv *env,
+Java_com_example_guiitamp_LiveEffectEngine_native_1setDefaultStreamValues(JNIEnv *env,
                                                jclass type,
                                                jint sampleRate,
                                                jint framesPerBurst) {
@@ -133,7 +133,7 @@ Java_com_example_giribasicamplifier_LiveEffectEngine_native_1setDefaultStreamVal
 }
 
 JNIEXPORT void JNICALL
-Java_com_example_giribasicamplifier_LiveEffectEngine_setGain(JNIEnv *env, jclass clazz,
+Java_com_example_guiitamp_LiveEffectEngine_setGain(JNIEnv *env, jclass clazz,
                                                                  jfloat value) {
     if (engine == nullptr) {
         LOGE(
@@ -146,7 +146,7 @@ Java_com_example_giribasicamplifier_LiveEffectEngine_setGain(JNIEnv *env, jclass
 }
 
 JNIEXPORT void JNICALL
-Java_com_example_giribasicamplifier_LiveEffectEngine_setDelay(JNIEnv *env, jclass clazz,
+Java_com_example_guiitamp_LiveEffectEngine_setDelay(JNIEnv *env, jclass clazz,
                                                              jboolean value) {
     if (engine == nullptr) {
         LOGE(
@@ -159,7 +159,7 @@ Java_com_example_giribasicamplifier_LiveEffectEngine_setDelay(JNIEnv *env, jclas
 }
 
 JNIEXPORT void JNICALL
-Java_com_example_giribasicamplifier_LiveEffectEngine_setChorus(JNIEnv *env, jclass clazz,
+Java_com_example_guiitamp_LiveEffectEngine_setChorus(JNIEnv *env, jclass clazz,
                                                               jboolean value) {
     if (engine == nullptr) {
         LOGE(
@@ -172,7 +172,7 @@ Java_com_example_giribasicamplifier_LiveEffectEngine_setChorus(JNIEnv *env, jcla
 }
 
 JNIEXPORT void JNICALL
-Java_com_example_giribasicamplifier_LiveEffectEngine_setEcho(JNIEnv *env, jclass clazz,
+Java_com_example_guiitamp_LiveEffectEngine_setEcho(JNIEnv *env, jclass clazz,
                                                               jboolean value) {
     if (engine == nullptr) {
         LOGE(
@@ -185,7 +185,7 @@ Java_com_example_giribasicamplifier_LiveEffectEngine_setEcho(JNIEnv *env, jclass
 }
 
 JNIEXPORT void JNICALL
-Java_com_example_giribasicamplifier_LiveEffectEngine_setReverb(JNIEnv *env, jclass clazz,
+Java_com_example_guiitamp_LiveEffectEngine_setReverb(JNIEnv *env, jclass clazz,
                                                               jboolean value) {
     if (engine == nullptr) {
         LOGE(
@@ -198,7 +198,7 @@ Java_com_example_giribasicamplifier_LiveEffectEngine_setReverb(JNIEnv *env, jcla
 }
 
 JNIEXPORT void JNICALL
-Java_com_example_giribasicamplifier_LiveEffectEngine_setDelayTime(JNIEnv *env, jclass clazz,
+Java_com_example_guiitamp_LiveEffectEngine_setDelayTime(JNIEnv *env, jclass clazz,
                                                                jdouble value) {
     if (engine == nullptr) {
         LOGE(
@@ -211,7 +211,7 @@ Java_com_example_giribasicamplifier_LiveEffectEngine_setDelayTime(JNIEnv *env, j
 }
 
 JNIEXPORT void JNICALL
-Java_com_example_giribasicamplifier_LiveEffectEngine_setReverbDamping(JNIEnv *env, jclass clazz,
+Java_com_example_guiitamp_LiveEffectEngine_setReverbDamping(JNIEnv *env, jclass clazz,
                                                                       jfloat value) {
     if (engine == nullptr) {
         LOGE(
@@ -225,7 +225,7 @@ Java_com_example_giribasicamplifier_LiveEffectEngine_setReverbDamping(JNIEnv *en
 
 
 JNIEXPORT void JNICALL
-Java_com_example_giribasicamplifier_LiveEffectEngine_setReverbRoomSize(JNIEnv *env, jclass clazz,
+Java_com_example_guiitamp_LiveEffectEngine_setReverbRoomSize(JNIEnv *env, jclass clazz,
                                                                        jfloat value) {
     if (engine == nullptr) {
         LOGE(
@@ -238,7 +238,7 @@ Java_com_example_giribasicamplifier_LiveEffectEngine_setReverbRoomSize(JNIEnv *e
 }
 
 JNIEXPORT void JNICALL
-Java_com_example_giribasicamplifier_LiveEffectEngine_setReverbMode(JNIEnv *env, jclass clazz,
+Java_com_example_guiitamp_LiveEffectEngine_setReverbMode(JNIEnv *env, jclass clazz,
                                                                    jfloat value) {
     if (engine == nullptr) {
         LOGE(
@@ -251,7 +251,7 @@ Java_com_example_giribasicamplifier_LiveEffectEngine_setReverbMode(JNIEnv *env, 
 }
 
 JNIEXPORT void JNICALL
-Java_com_example_giribasicamplifier_LiveEffectEngine_setChorusModDepth(JNIEnv *env, jclass clazz,
+Java_com_example_guiitamp_LiveEffectEngine_setChorusModDepth(JNIEnv *env, jclass clazz,
                                                                        jfloat value) {
     if (engine == nullptr) {
         LOGE(
@@ -264,7 +264,7 @@ Java_com_example_giribasicamplifier_LiveEffectEngine_setChorusModDepth(JNIEnv *e
 }
 
 JNIEXPORT void JNICALL
-Java_com_example_giribasicamplifier_LiveEffectEngine_setChorusModFrequency(JNIEnv *env, jclass clazz,
+Java_com_example_guiitamp_LiveEffectEngine_setChorusModFrequency(JNIEnv *env, jclass clazz,
                                                                            jfloat value) {
     if (engine == nullptr) {
         LOGE(
@@ -277,7 +277,7 @@ Java_com_example_giribasicamplifier_LiveEffectEngine_setChorusModFrequency(JNIEn
 }
 
 JNIEXPORT void JNICALL
-Java_com_example_giribasicamplifier_LiveEffectEngine_setEchoDelay(JNIEnv *env, jclass clazz,
+Java_com_example_guiitamp_LiveEffectEngine_setEchoDelay(JNIEnv *env, jclass clazz,
                                                                   jlong value) {
     if (engine == nullptr) {
         LOGE(

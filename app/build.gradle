@@ -7,7 +7,7 @@ android {
     buildToolsVersion "30.0.3"
 
     defaultConfig {
-        applicationId "com.example.giribasicamplifier"
+        applicationId "com.example.guiitamp"
         minSdkVersion 28
         targetSdkVersion 30
         versionCode 1

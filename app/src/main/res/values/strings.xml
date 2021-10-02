@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">giRi Basic Amplifier</string>
+    <string name="app_name">Guiitamp</string>
     <string name="action_settings">Settings</string>
     <!-- Strings used for fragments for navigation -->
     <string name="device_name">Device Name</string>
@@ -8,6 +8,6 @@
     <string name="output">Select Output:</string>
     <string name="audio_driver">Select AudioDriver:</string>
     <string name="tutorial">How to connect the guitar?</string>
-    <string name="header_title">giRi Basic Amp</string>
+    <string name="header_title">Guiitamp</string>
     <string name="header_text">Audio Settings</string>
 </resources>

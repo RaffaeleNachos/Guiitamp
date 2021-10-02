@@ -1,4 +1,4 @@
-package com.example.giribasicamplifier;
+package com.example.guiitamp;
 
 import org.junit.Test;
 

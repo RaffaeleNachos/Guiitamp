@@ -1,4 +1,4 @@
-package com.example.giribasicamplifier;
+package com.example.guiitamp;
 /*
  * Copyright 2017 The Android Open Source Project
  *

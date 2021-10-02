@@ -1,6 +1,5 @@
-package com.example.giribasicamplifier;
+package com.example.guiitamp;
 
-import android.app.Activity;
 import android.content.Context;
 import android.content.SharedPreferences;
 import android.media.AudioManager;
