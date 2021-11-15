@@ -8,6 +8,8 @@
     <string name="output">Select Output:</string>
     <string name="audio_driver">Select AudioDriver:</string>
     <string name="tutorial">How to connect the guitar?</string>
+    <string name="tutorial_text">In order to use Guiitamp you need a guitar interface adapter, an example is the <a href="https://www.ikmultimedia.com/products/irig2/">iRig 2</a>.</string>
     <string name="header_title">Guiitamp</string>
     <string name="header_text">Audio Settings</string>
+    <string name="githubTutorial">https://git.io/J1OhZ</string>
 </resources>

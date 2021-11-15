@@ -14,15 +14,15 @@ public class Chorus extends Pedal {
         knobs.put(new Knob.OnStateChanged() {
             @Override
             public void onState(int state) {
-                LiveEffectEngine.setChorusModDepth((float) (state * 0.05));
+                LiveEffectEngine.setChorusModFrequency((float) (state * 0.05));
             }
-        }, new PedalInfo(20,1, "MOD DEPTH")); // StockValue: 0.05  Range: 0.0 -> 1.0
+        }, new PedalInfo(11,1, "MOD FREQ")); // StockValue: 0.02   Range: 0.00 -> 0.5
         knobs.put(new Knob.OnStateChanged() {
             @Override
             public void onState(int state) {
-                LiveEffectEngine.setChorusModFrequency((float) (state * 0.1));
+                LiveEffectEngine.setChorusEffectMix((float) (state * 0.1));
             }
-        }, new PedalInfo(60,1, "MOD FREQ")); // StockValue: 0.02   Range: 0.1 -> 6
+        }, new PedalInfo(11,10, "EFFECT MIX")); // StockValue: 1   Range: 0.0 -> 1.0
     }
 
     public void triggerEffect(){

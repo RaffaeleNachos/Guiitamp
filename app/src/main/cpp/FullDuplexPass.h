@@ -46,7 +46,7 @@ public:
         for (int32_t i = 0; i < samplesToProcess; i++) {
             float toProcess = *inputFloats++;
             if (chorus) toProcess = simpleChorus.tick(toProcess);
-            if (delay) toProcess = simpleDelay.tick(toProcess);
+            if (delay) toProcess = simpleDelay->process(toProcess);
             if (reverb) toProcess = simpleReverb.tick(toProcess);
             if (echo) toProcess = simpleEcho.tick(toProcess);
             *outputFloats++ = toProcess * gainValue;

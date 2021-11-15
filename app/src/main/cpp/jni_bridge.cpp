@@ -207,7 +207,8 @@ Java_com_example_guiitamp_LiveEffectEngine_setDelayTime(JNIEnv *env, jclass claz
         return;
     }
 
-    engine->mFullDuplexPass.simpleDelay.setDelay(value);
+    engine->mFullDuplexPass.resetDelay();
+    engine->mFullDuplexPass.simpleDelay->setDelayTime(value);
 }
 
 JNIEXPORT void JNICALL
@@ -277,6 +278,19 @@ Java_com_example_guiitamp_LiveEffectEngine_setChorusModFrequency(JNIEnv *env, jc
 }
 
 JNIEXPORT void JNICALL
+Java_com_example_guiitamp_LiveEffectEngine_setChorusEffectMix(JNIEnv *env, jclass clazz,
+                                                                 jfloat value) {
+    if (engine == nullptr) {
+        LOGE(
+                "Engine is null, you must call createEngine before calling this "
+                "method");
+        return;
+    }
+
+    engine->mFullDuplexPass.simpleChorus.setEffectMix(value);
+}
+
+JNIEXPORT void JNICALL
 Java_com_example_guiitamp_LiveEffectEngine_setEchoDelay(JNIEnv *env, jclass clazz,
                                                                   jlong value) {
     if (engine == nullptr) {
@@ -287,6 +301,19 @@ Java_com_example_guiitamp_LiveEffectEngine_setEchoDelay(JNIEnv *env, jclass claz
     }
 
     engine->mFullDuplexPass.simpleEcho.setDelay(value);
+}
+
+JNIEXPORT void JNICALL
+Java_com_example_guiitamp_LiveEffectEngine_setEchoEffectMix(JNIEnv *env, jclass clazz,
+                                                        jfloat value) {
+    if (engine == nullptr) {
+        LOGE(
+                "Engine is null, you must call createEngine before calling this "
+                "method");
+        return;
+    }
+
+    engine->mFullDuplexPass.simpleEcho.setEffectMix(1.0);
 }
 
 }

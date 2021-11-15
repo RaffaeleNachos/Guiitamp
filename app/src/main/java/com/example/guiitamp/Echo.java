@@ -14,9 +14,15 @@ public class Echo extends Pedal{
         knobs.put(new Knob.OnStateChanged() {
             @Override
             public void onState(int state) {
-                LiveEffectEngine.setEchoDelay((long) (state * 11025));
+                LiveEffectEngine.setEchoDelay(state * 11025);
             }
-        }, new PedalInfo(20,10,"DELAY")); // StockValue: (44100 * 2.5)   Range: 0 -> (44100 * 5)
+        }, new PedalInfo(21,10,"DELAY")); // StockValue: (44100 * 2.5)   Range: 0 -> (44100 * 5)
+        knobs.put(new Knob.OnStateChanged() {
+            @Override
+            public void onState(int state) {
+                LiveEffectEngine.setEchoEffectMix((float) (state * 0.1));
+            }
+        }, new PedalInfo(11,10, "EFFECT MIX")); // StockValue: 1   Range: 0.0 -> 1.0
     }
 
     public void triggerEffect(){

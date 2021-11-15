@@ -24,7 +24,11 @@
 #include "TSKEffects/Chorus.h"
 #include "TSKEffects/Echo.h"
 #include "TSKEffects/FreeVerb.h"
+#include "TSKEffects/Noise.h"
+#include "TSKEffects/Resonate.h"
 #include "DelayEffects/SimpleDelay.hpp"
+#include "DelayEffects/SimpleFlanger.hpp"
+
 
 class FullDuplexStream : public oboe::AudioStreamCallback {
 public:
@@ -45,8 +49,11 @@ public:
     void setDelay(bool value){
         delay = value;
     }
+    void resetDelay(){
+        simpleDelay = new SimpleDelay(44099, 44100);
+    }
 
-    stk::Delay simpleDelay = {44100 * 1, 44100 * 5};
+    SimpleDelay *simpleDelay = new SimpleDelay(44099, 44100);
 
     //ECHO
     bool echo = false;

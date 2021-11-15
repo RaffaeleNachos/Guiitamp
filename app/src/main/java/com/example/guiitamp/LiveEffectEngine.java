@@ -53,8 +53,10 @@ public enum LiveEffectEngine {
     //Chorus
     static native void setChorusModDepth(float value);
     static native void setChorusModFrequency(float value);
+    static native void setChorusEffectMix(float value);
     //Echo
     static native void setEchoDelay(long value);
+    static native void setEchoEffectMix(float value);
 
 
 
