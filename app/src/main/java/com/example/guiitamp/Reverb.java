@@ -31,7 +31,8 @@ public class Reverb extends Pedal {
         }, new PedalInfo(20,20, "MODE")); // StockValue: 1.0   Range: 0 -> 1
     }
 
+    @Override
     public void triggerEffect(){
-        LiveEffectEngine.setReverb(super.isActive);
+        LiveEffectEngine.setReverbState(super.isActive);
     }
 }

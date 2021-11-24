@@ -38,10 +38,12 @@ public enum LiveEffectEngine {
     static native void delete();
     static native void native_setDefaultStreamValues(int defaultSampleRate, int defaultFramesPerBurst);
     // set on/off effects
-    static native void setDelay(boolean value);
-    static native void setEcho(boolean value);
-    static native void setChorus(boolean value);
-    static native void setReverb(boolean value);
+    static native void setDelayState(boolean value);
+    static native void setChorusState(boolean value);
+    static native void setReverbState(boolean value);
+    static native void setTremoloState(boolean value);
+    static native void setFuzzState(boolean value);
+    static native void setDistortionState(boolean value);
     // set values
     static native void setGain(float value);
     // Delay
@@ -51,12 +53,13 @@ public enum LiveEffectEngine {
     static native void setReverbRoomSize(float value);
     static native void setReverbMode(float value);
     //Chorus
-    static native void setChorusModDepth(float value);
     static native void setChorusModFrequency(float value);
     static native void setChorusEffectMix(float value);
-    //Echo
-    static native void setEchoDelay(long value);
-    static native void setEchoEffectMix(float value);
+    //Tremolo
+
+    //Fuzz
+
+    //Distortion
 
 
 

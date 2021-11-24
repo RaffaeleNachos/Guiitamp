@@ -22,10 +22,9 @@
 
 #include "oboe/Oboe.h"
 #include "TSKEffects/Chorus.h"
-#include "TSKEffects/Echo.h"
+#include "TSKEffects/TwoPole.h"
 #include "TSKEffects/FreeVerb.h"
-#include "TSKEffects/Noise.h"
-#include "TSKEffects/Resonate.h"
+#include "AEfromArduino/AudioEffect.h"
 #include "DelayEffects/SimpleDelay.hpp"
 #include "DelayEffects/SimpleFlanger.hpp"
 
@@ -36,7 +35,6 @@ public:
     virtual ~FullDuplexStream() = default;
 
     //GAIN
-
     float gainValue = 1.0;
 
     void setGainValue(float value){
@@ -46,31 +44,60 @@ public:
     //DELAY
     bool delay = false;
 
-    void setDelay(bool value){
-        delay = value;
-    }
     void resetDelay(){
         simpleDelay = new SimpleDelay(44099, 44100);
     }
 
     SimpleDelay *simpleDelay = new SimpleDelay(44099, 44100);
 
-    //ECHO
-    bool echo = false;
-
-    void setEcho(bool value){
-        if (!value) simpleEcho.clear();
-        echo = value;
+    //TREMOLO
+    bool tremolo = false;
+    void setTremoloDuration(int16_t duration){
+        tremoloDuration_ms = duration;
+        resetTremolo();
+    }
+    void setTremoloEffectMix(u_int8_t percent){
+        depthPercent = percent;
+        resetTremolo();
     }
 
-    stk::Echo simpleEcho = {44100 * 5}; // remove hardcoded 44100 and ask for real sampling freq.
+    void resetTremolo(){
+        simpleTremolo = new audio_tools::Tremolo(tremoloDuration_ms,depthPercent);
+    }
+
+    int16_t tremoloDuration_ms=1000;
+    u_int8_t depthPercent=90;
+    audio_tools::Tremolo *simpleTremolo = new audio_tools::Tremolo(tremoloDuration_ms,depthPercent);
+
+    //FUZZ
+    bool fuzz = false;
+    void setFuzzEffectValue(float value){
+        fuzzEffectValue = value;
+        resetFuzz();
+    }
+    void resetFuzz(){
+        simpleFuzz = new audio_tools::Fuzz(fuzzEffectValue);
+    }
+    float fuzzEffectValue = 6.5;
+    audio_tools::Fuzz *simpleFuzz = new audio_tools::Fuzz(fuzzEffectValue);
+
+    //DISTORTION
+    bool distortion = false;
+    void setDistortionThreshold(int16_t threshold){
+        clipThreshold = threshold;
+        resetDistortion();
+    }
+    void resetDistortion(){
+        simpleDistortion = new audio_tools::Distortion(clipThreshold);
+    }
+    int16_t clipThreshold = 5000;
+    audio_tools::Distortion *simpleDistortion = new audio_tools::Distortion(clipThreshold);
 
     //CHORUS
     bool chorus = false;
 
-    void setChorus(bool value){
-        if (!value) simpleChorus.clear();
-        chorus = value;
+    void resetChorus(){
+        simpleChorus.clear();
     }
 
     //stk::Chorus simpleChorus = {6000};
@@ -78,10 +105,6 @@ public:
 
     //REVERB
     bool reverb = false;
-
-    void setReverb(bool value){
-        reverb = value;
-    }
 
     stk::FreeVerb simpleReverb;
 

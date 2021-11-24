@@ -88,7 +88,9 @@ public class MainActivity extends AppCompatActivity {
         availablePedals.add(new Chorus(this.getDrawable(R.drawable.chorus)));
         availablePedals.add(new Delay(this.getDrawable(R.drawable.delay)));
         availablePedals.add(new Reverb(this.getDrawable(R.drawable.reverb)));
-        availablePedals.add(new Echo(this.getDrawable(R.drawable.echo)));
+        availablePedals.add(new Tremolo(this.getDrawable(R.drawable.tremolo)));
+        availablePedals.add(new Fuzz(this.getDrawable(R.drawable.fuzz)));
+        availablePedals.add(new Distortion(this.getDrawable(R.drawable.distortion)));
         pedalAdapter.setPedalList(availablePedals);
         pedalsBtnList.setAdapter(pedalAdapter);
     }

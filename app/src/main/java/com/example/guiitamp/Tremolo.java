@@ -6,21 +6,21 @@ import java.util.HashMap;
 
 import it.beppi.knoblibrary.Knob;
 
-public class Delay extends Pedal {
+public class Tremolo extends Pedal{
 
-    public Delay(Drawable pedalImg) {
+    public Tremolo(Drawable pedalImg) {
         super(pedalImg);
         this.knobs = new HashMap<>();
         knobs.put(new Knob.OnStateChanged() {
             @Override
             public void onState(int state) {
-                LiveEffectEngine.setDelayTime(state * 2200);
+                //LiveEffectEngine.setDelayTime(state * 2200);
             }
         }, new PedalInfo(21,20, "TIME")); // StockValue: (44000)   Range: 0 -> (44100)
     }
 
     @Override
-    public void triggerEffect(){
-        LiveEffectEngine.setDelayState(super.isActive);
+    public void triggerEffect() {
+        LiveEffectEngine.setTremoloState(super.isActive);
     }
 }

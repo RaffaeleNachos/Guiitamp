@@ -25,7 +25,8 @@ public class Chorus extends Pedal {
         }, new PedalInfo(11,10, "EFFECT MIX")); // StockValue: 1   Range: 0.0 -> 1.0
     }
 
+    @Override
     public void triggerEffect(){
-        LiveEffectEngine.setChorus(super.isActive);
+        LiveEffectEngine.setChorusState(super.isActive);
     }
 }

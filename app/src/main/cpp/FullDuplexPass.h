@@ -48,7 +48,9 @@ public:
             if (chorus) toProcess = simpleChorus.tick(toProcess);
             if (delay) toProcess = simpleDelay->process(toProcess);
             if (reverb) toProcess = simpleReverb.tick(toProcess);
-            if (echo) toProcess = simpleEcho.tick(toProcess);
+            if (tremolo) simpleTremolo->process(floatToInt(toProcess));
+            if (fuzz) simpleFuzz->process(floatToInt(toProcess));
+            if (distortion) simpleDistortion->process(floatToInt(toProcess));
             *outputFloats++ = toProcess * gainValue;
         }
 
@@ -59,6 +61,22 @@ public:
         }
 
         return oboe::DataCallbackResult::Continue;
+    }
+
+    static int floatToInt(float floatToProcess) {
+        int16_t processedInt;
+        if (floatToProcess >= 1.0)
+            processedInt = 32767;
+        else if (floatToProcess <= -1.0)
+            processedInt = -32768;
+        else
+            processedInt = floor(floatToProcess * 32768.0);
+        return processedInt;
+    }
+
+    static float intToFloat(int intToProcess) {
+        float processedFloat = intToProcess / 32768.0;
+        return processedFloat;
     }
 };
 #endif //SAMPLES_FULLDUPLEXPASS_H
