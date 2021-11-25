@@ -14,9 +14,9 @@ public class Fuzz extends Pedal{
         knobs.put(new Knob.OnStateChanged() {
             @Override
             public void onState(int state) {
-                //LiveEffectEngine.setDelayTime(state * 2200);
+                LiveEffectEngine.setFuzzEffectValue((float) (state * 1.0));
             }
-        }, new PedalInfo(21,20, "TIME")); // StockValue: (44000)   Range: 0 -> (44100)
+        }, new PedalInfo(11,5, "TIME")); // StockValue: (5.0)   Range: 0 -> (10.0)
     }
 
     @Override

@@ -56,11 +56,12 @@ public enum LiveEffectEngine {
     static native void setChorusModFrequency(float value);
     static native void setChorusEffectMix(float value);
     //Tremolo
-
+    static native void setTremoloDuration(long value);
+    static native void setTremoloEffectMix(int value);
     //Fuzz
-
+    static native void setFuzzEffectValue(float value);
     //Distortion
-
+    static native void setDistortionThreshold(long value);
 
 
     static void setDefaultStreamValues(Context context) {

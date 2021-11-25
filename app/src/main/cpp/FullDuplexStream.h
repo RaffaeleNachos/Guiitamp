@@ -65,8 +65,8 @@ public:
         simpleTremolo = new audio_tools::Tremolo(tremoloDuration_ms,depthPercent);
     }
 
-    int16_t tremoloDuration_ms=1000;
-    u_int8_t depthPercent=90;
+    int16_t tremoloDuration_ms=500;
+    u_int8_t depthPercent=50;
     audio_tools::Tremolo *simpleTremolo = new audio_tools::Tremolo(tremoloDuration_ms,depthPercent);
 
     //FUZZ
@@ -78,7 +78,7 @@ public:
     void resetFuzz(){
         simpleFuzz = new audio_tools::Fuzz(fuzzEffectValue);
     }
-    float fuzzEffectValue = 6.5;
+    float fuzzEffectValue = 5.0;
     audio_tools::Fuzz *simpleFuzz = new audio_tools::Fuzz(fuzzEffectValue);
 
     //DISTORTION
@@ -90,7 +90,7 @@ public:
     void resetDistortion(){
         simpleDistortion = new audio_tools::Distortion(clipThreshold);
     }
-    int16_t clipThreshold = 5000;
+    int16_t clipThreshold = 2000;
     audio_tools::Distortion *simpleDistortion = new audio_tools::Distortion(clipThreshold);
 
     //CHORUS

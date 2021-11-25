@@ -48,9 +48,9 @@ public:
             if (chorus) toProcess = simpleChorus.tick(toProcess);
             if (delay) toProcess = simpleDelay->process(toProcess);
             if (reverb) toProcess = simpleReverb.tick(toProcess);
-            if (tremolo) simpleTremolo->process(floatToInt(toProcess));
-            if (fuzz) simpleFuzz->process(floatToInt(toProcess));
-            if (distortion) simpleDistortion->process(floatToInt(toProcess));
+            if (tremolo) toProcess = intToFloat(simpleTremolo->process(floatToInt(toProcess)));
+            if (fuzz) toProcess = intToFloat(simpleFuzz->process(floatToInt(toProcess)));
+            if (distortion) toProcess = intToFloat(simpleDistortion->process(floatToInt(toProcess)));
             *outputFloats++ = toProcess * gainValue;
         }
 

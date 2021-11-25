@@ -14,9 +14,9 @@ public class Distortion extends Pedal{
         knobs.put(new Knob.OnStateChanged() {
             @Override
             public void onState(int state) {
-                //LiveEffectEngine.setDelayTime(state * 2200);
+                LiveEffectEngine.setDistortionThreshold(state * 400);
             }
-        }, new PedalInfo(21,20, "TIME")); // StockValue: (44000)   Range: 0 -> (44100)
+        }, new PedalInfo(21,5, "THRESHOLD")); // StockValue: (2000)   Range: 0 -> (8000)
     }
 
     @Override

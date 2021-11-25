@@ -27,7 +27,7 @@ extern "C" {
 
 JNIEXPORT jboolean JNICALL
 Java_com_example_guiitamp_LiveEffectEngine_create(JNIEnv *env,
-                                                               jclass) {
+                                                  jclass) {
     if (engine == nullptr) {
         engine = new LiveEffectEngine();
     }
@@ -37,7 +37,7 @@ Java_com_example_guiitamp_LiveEffectEngine_create(JNIEnv *env,
 
 JNIEXPORT void JNICALL
 Java_com_example_guiitamp_LiveEffectEngine_delete(JNIEnv *env,
-                                                               jclass) {
+                                                  jclass) {
     if (engine) {
         engine->setEffectOn(false);
         delete engine;
@@ -47,11 +47,11 @@ Java_com_example_guiitamp_LiveEffectEngine_delete(JNIEnv *env,
 
 JNIEXPORT jboolean JNICALL
 Java_com_example_guiitamp_LiveEffectEngine_setEffectOn(
-    JNIEnv *env, jclass, jboolean isEffectOn) {
+        JNIEnv *env, jclass, jboolean isEffectOn) {
     if (engine == nullptr) {
         LOGE(
-            "Engine is null, you must call createEngine before calling this "
-            "method");
+                "Engine is null, you must call createEngine before calling this "
+                "method");
         return JNI_FALSE;
     }
 
@@ -60,11 +60,11 @@ Java_com_example_guiitamp_LiveEffectEngine_setEffectOn(
 
 JNIEXPORT void JNICALL
 Java_com_example_guiitamp_LiveEffectEngine_setRecordingDeviceId(
-    JNIEnv *env, jclass, jint deviceId) {
+        JNIEnv *env, jclass, jint deviceId) {
     if (engine == nullptr) {
         LOGE(
-            "Engine is null, you must call createEngine before calling this "
-            "method");
+                "Engine is null, you must call createEngine before calling this "
+                "method");
         return;
     }
 
@@ -73,11 +73,11 @@ Java_com_example_guiitamp_LiveEffectEngine_setRecordingDeviceId(
 
 JNIEXPORT void JNICALL
 Java_com_example_guiitamp_LiveEffectEngine_setPlaybackDeviceId(
-    JNIEnv *env, jclass, jint deviceId) {
+        JNIEnv *env, jclass, jint deviceId) {
     if (engine == nullptr) {
         LOGE(
-            "Engine is null, you must call createEngine before calling this "
-            "method");
+                "Engine is null, you must call createEngine before calling this "
+                "method");
         return;
     }
 
@@ -86,12 +86,12 @@ Java_com_example_guiitamp_LiveEffectEngine_setPlaybackDeviceId(
 
 JNIEXPORT jboolean JNICALL
 Java_com_example_guiitamp_LiveEffectEngine_setAPI(JNIEnv *env,
-                                                               jclass type,
-                                                               jint apiType) {
+                                                  jclass type,
+                                                  jint apiType) {
     if (engine == nullptr) {
         LOGE(
-            "Engine is null, you must call createEngine "
-            "before calling this method");
+                "Engine is null, you must call createEngine "
+                "before calling this method");
         return JNI_FALSE;
     }
 
@@ -113,11 +113,11 @@ Java_com_example_guiitamp_LiveEffectEngine_setAPI(JNIEnv *env,
 
 JNIEXPORT jboolean JNICALL
 Java_com_example_guiitamp_LiveEffectEngine_isAAudioRecommended(
-    JNIEnv *env, jclass type) {
+        JNIEnv *env, jclass type) {
     if (engine == nullptr) {
         LOGE(
-            "Engine is null, you must call createEngine "
-            "before calling this method");
+                "Engine is null, you must call createEngine "
+                "before calling this method");
         return JNI_FALSE;
     }
     return engine->isAAudioRecommended() ? JNI_TRUE : JNI_FALSE;
@@ -125,16 +125,16 @@ Java_com_example_guiitamp_LiveEffectEngine_isAAudioRecommended(
 
 JNIEXPORT void JNICALL
 Java_com_example_guiitamp_LiveEffectEngine_native_1setDefaultStreamValues(JNIEnv *env,
-                                               jclass type,
-                                               jint sampleRate,
-                                               jint framesPerBurst) {
+                                                                          jclass type,
+                                                                          jint sampleRate,
+                                                                          jint framesPerBurst) {
     oboe::DefaultStreamValues::SampleRate = (int32_t) sampleRate;
     oboe::DefaultStreamValues::FramesPerBurst = (int32_t) framesPerBurst;
 }
 
 JNIEXPORT void JNICALL
 Java_com_example_guiitamp_LiveEffectEngine_setGain(JNIEnv *env, jclass clazz,
-                                                                 jfloat value) {
+                                                   jfloat value) {
     if (engine == nullptr) {
         LOGE(
                 "Engine is null, you must call createEngine before calling this "
@@ -155,7 +155,7 @@ Java_com_example_guiitamp_LiveEffectEngine_setDelayState(JNIEnv *env, jclass cla
         return;
     }
 
-    engine->mFullDuplexPass.setDelay(value);
+    engine->mFullDuplexPass.delay = value;
 }
 
 JNIEXPORT void JNICALL
@@ -168,12 +168,13 @@ Java_com_example_guiitamp_LiveEffectEngine_setChorusState(JNIEnv *env, jclass cl
         return;
     }
 
-    engine->mFullDuplexPass.setChorus(value);
+    engine->mFullDuplexPass.resetChorus();
+    engine->mFullDuplexPass.chorus = value;
 }
 
 JNIEXPORT void JNICALL
 Java_com_example_guiitamp_LiveEffectEngine_setTremoloState(JNIEnv *env, jclass clazz,
-                                                              jboolean value) {
+                                                           jboolean value) {
     if (engine == nullptr) {
         LOGE(
                 "Engine is null, you must call createEngine before calling this "
@@ -194,12 +195,12 @@ Java_com_example_guiitamp_LiveEffectEngine_setReverbState(JNIEnv *env, jclass cl
         return;
     }
 
-    engine->mFullDuplexPass.setReverb(value);
+    engine->mFullDuplexPass.reverb = value;
 }
 
 JNIEXPORT void JNICALL
 Java_com_example_guiitamp_LiveEffectEngine_setDelayTime(JNIEnv *env, jclass clazz,
-                                                               jdouble value) {
+                                                        jdouble value) {
     if (engine == nullptr) {
         LOGE(
                 "Engine is null, you must call createEngine before calling this "
@@ -213,7 +214,7 @@ Java_com_example_guiitamp_LiveEffectEngine_setDelayTime(JNIEnv *env, jclass claz
 
 JNIEXPORT void JNICALL
 Java_com_example_guiitamp_LiveEffectEngine_setReverbDamping(JNIEnv *env, jclass clazz,
-                                                                      jfloat value) {
+                                                            jfloat value) {
     if (engine == nullptr) {
         LOGE(
                 "Engine is null, you must call createEngine before calling this "
@@ -227,7 +228,7 @@ Java_com_example_guiitamp_LiveEffectEngine_setReverbDamping(JNIEnv *env, jclass 
 
 JNIEXPORT void JNICALL
 Java_com_example_guiitamp_LiveEffectEngine_setReverbRoomSize(JNIEnv *env, jclass clazz,
-                                                                       jfloat value) {
+                                                             jfloat value) {
     if (engine == nullptr) {
         LOGE(
                 "Engine is null, you must call createEngine before calling this "
@@ -240,7 +241,7 @@ Java_com_example_guiitamp_LiveEffectEngine_setReverbRoomSize(JNIEnv *env, jclass
 
 JNIEXPORT void JNICALL
 Java_com_example_guiitamp_LiveEffectEngine_setReverbMode(JNIEnv *env, jclass clazz,
-                                                                   jfloat value) {
+                                                         jfloat value) {
     if (engine == nullptr) {
         LOGE(
                 "Engine is null, you must call createEngine before calling this "
@@ -252,21 +253,8 @@ Java_com_example_guiitamp_LiveEffectEngine_setReverbMode(JNIEnv *env, jclass cla
 }
 
 JNIEXPORT void JNICALL
-Java_com_example_guiitamp_LiveEffectEngine_setChorusModDepth(JNIEnv *env, jclass clazz,
-                                                                       jfloat value) {
-    if (engine == nullptr) {
-        LOGE(
-                "Engine is null, you must call createEngine before calling this "
-                "method");
-        return;
-    }
-
-    engine->mFullDuplexPass.simpleChorus.setModDepth(value);
-}
-
-JNIEXPORT void JNICALL
 Java_com_example_guiitamp_LiveEffectEngine_setChorusModFrequency(JNIEnv *env, jclass clazz,
-                                                                           jfloat value) {
+                                                                 jfloat value) {
     if (engine == nullptr) {
         LOGE(
                 "Engine is null, you must call createEngine before calling this "
@@ -279,7 +267,7 @@ Java_com_example_guiitamp_LiveEffectEngine_setChorusModFrequency(JNIEnv *env, jc
 
 JNIEXPORT void JNICALL
 Java_com_example_guiitamp_LiveEffectEngine_setChorusEffectMix(JNIEnv *env, jclass clazz,
-                                                                 jfloat value) {
+                                                              jfloat value) {
     if (engine == nullptr) {
         LOGE(
                 "Engine is null, you must call createEngine before calling this "
@@ -290,5 +278,81 @@ Java_com_example_guiitamp_LiveEffectEngine_setChorusEffectMix(JNIEnv *env, jclas
     engine->mFullDuplexPass.simpleChorus.setEffectMix(value);
 }
 
+JNIEXPORT void JNICALL
+Java_com_example_guiitamp_LiveEffectEngine_setFuzzState(JNIEnv *env, jclass clazz, jboolean value) {
+    if (engine == nullptr) {
+        LOGE(
+                "Engine is null, you must call createEngine before calling this "
+                "method");
+        return;
+    }
+
+    engine->mFullDuplexPass.fuzz = value;
+}
+
+JNIEXPORT void JNICALL
+Java_com_example_guiitamp_LiveEffectEngine_setDistortionState(JNIEnv *env, jclass clazz,
+                                                              jboolean value) {
+    if (engine == nullptr) {
+        LOGE(
+                "Engine is null, you must call createEngine before calling this "
+                "method");
+        return;
+    }
+
+    engine->mFullDuplexPass.distortion = value;
+}
+
+JNIEXPORT void JNICALL
+Java_com_example_guiitamp_LiveEffectEngine_setTremoloDuration(JNIEnv *env, jclass clazz,
+                                                              jlong value) {
+    if (engine == nullptr) {
+        LOGE(
+                "Engine is null, you must call createEngine before calling this "
+                "method");
+        return;
+    }
+
+    engine->mFullDuplexPass.setTremoloDuration(value);
+}
+
+JNIEXPORT void JNICALL
+Java_com_example_guiitamp_LiveEffectEngine_setTremoloEffectMix(JNIEnv *env, jclass clazz,
+                                                               jint value) {
+    if (engine == nullptr) {
+        LOGE(
+                "Engine is null, you must call createEngine before calling this "
+                "method");
+        return;
+    }
+
+    engine->mFullDuplexPass.setTremoloEffectMix(value);
+}
+
+JNIEXPORT void JNICALL
+Java_com_example_guiitamp_LiveEffectEngine_setFuzzEffectValue(JNIEnv *env, jclass clazz,
+                                                              jfloat value) {
+    if (engine == nullptr) {
+        LOGE(
+                "Engine is null, you must call createEngine before calling this "
+                "method");
+        return;
+    }
+
+    engine->mFullDuplexPass.setFuzzEffectValue(value);
+}
+
+JNIEXPORT void JNICALL
+Java_com_example_guiitamp_LiveEffectEngine_setDistortionThreshold(JNIEnv *env, jclass clazz,
+                                                                  jlong value) {
+    if (engine == nullptr) {
+        LOGE(
+                "Engine is null, you must call createEngine before calling this "
+                "method");
+        return;
+    }
+
+    engine->mFullDuplexPass.setDistortionThreshold(value);
+}
 
 }
