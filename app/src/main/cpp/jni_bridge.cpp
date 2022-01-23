@@ -355,4 +355,17 @@ Java_com_example_guiitamp_LiveEffectEngine_setDistortionThreshold(JNIEnv *env, j
     engine->mFullDuplexPass.setDistortionThreshold(value);
 }
 
+JNIEXPORT void JNICALL
+Java_com_example_guiitamp_LiveEffectEngine_setFuzzEffectMix(JNIEnv *env, jclass clazz, jint value) {
+
+    if (engine == nullptr) {
+        LOGE(
+                "Engine is null, you must call createEngine before calling this "
+                "method");
+        return;
+    }
+
+    engine->mFullDuplexPass.setFuzzEffectMix(value);
+}
+
 }

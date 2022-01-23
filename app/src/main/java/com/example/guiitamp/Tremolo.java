@@ -14,9 +14,9 @@ public class Tremolo extends Pedal{
         knobs.put(new Knob.OnStateChanged() {
             @Override
             public void onState(int state) {
-                LiveEffectEngine.setTremoloDuration(state * 100);
+                LiveEffectEngine.setTremoloDuration((state + 1) * 100);
             }
-        }, new PedalInfo(21,5, "DURATION")); // StockValue: (500)   Range: 0 -> (2000)
+        }, new PedalInfo(20,5, "DURATION")); // StockValue: (500)   Range: 100 -> (2000)
         knobs.put(new Knob.OnStateChanged() {
             @Override
             public void onState(int state) {

@@ -101,16 +101,16 @@ class Distortion : public AudioEffect  {
 class Fuzz : public AudioEffect  {
     public:
         /// Fuzz Constructor: use e.g. effectValue=6.5; maxOut = 300
-        Fuzz(float &fuzzEffectValue, uint16_t maxOut = 1000){
+        Fuzz(float &fuzzEffectValue, uint16_t &maxOut){
             p_effect_value = &fuzzEffectValue;
-            max_out = maxOut;
+            max_out = &maxOut;
         }
 
         effect_t process(effect_t input){
             if (!active()) return input;
             float v = *p_effect_value;
             int32_t result = clip(v * input) ;
-            return map(result * v, -32768, +32767,-max_out, max_out);
+            return map(result * v, -32768, +32767,- *max_out,  *max_out);
         }
 
         float map(float x, float in_min, float in_max, float out_min, float out_max) {
@@ -119,7 +119,7 @@ class Fuzz : public AudioEffect  {
 
     protected:
         float *p_effect_value;
-        uint16_t max_out;
+        uint16_t *max_out;
 
 };
 
@@ -157,6 +157,11 @@ class Tremolo : public AudioEffect  {
             }
 
             return clip(out);
+        }
+
+        void updateDuration(int16_t &duration_ms, uint32_t sampleRate=44100){
+            int32_t rate_count = sampleRate * duration_ms / 1000;
+            rate_count_half = rate_count / 2;
         }
 
 

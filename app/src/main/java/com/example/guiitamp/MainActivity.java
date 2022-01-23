@@ -42,7 +42,7 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_LANDSCAPE);
+        setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_SENSOR_LANDSCAPE);
         getWindow().addFlags(WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON);
 
         sideMenu = new SideMenu();
@@ -85,12 +85,12 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void setUpPedalList(){
+        availablePedals.add(new Fuzz(this.getDrawable(R.drawable.fuzz)));
         availablePedals.add(new Chorus(this.getDrawable(R.drawable.chorus)));
+        availablePedals.add(new Tremolo(this.getDrawable(R.drawable.tremolo)));
         availablePedals.add(new Delay(this.getDrawable(R.drawable.delay)));
         availablePedals.add(new Reverb(this.getDrawable(R.drawable.reverb)));
-        availablePedals.add(new Tremolo(this.getDrawable(R.drawable.tremolo)));
-        availablePedals.add(new Fuzz(this.getDrawable(R.drawable.fuzz)));
-        availablePedals.add(new Distortion(this.getDrawable(R.drawable.distortion)));
+        //availablePedals.add(new Distortion(this.getDrawable(R.drawable.distortion)));
         pedalAdapter.setPedalList(availablePedals);
         pedalsBtnList.setAdapter(pedalAdapter);
     }

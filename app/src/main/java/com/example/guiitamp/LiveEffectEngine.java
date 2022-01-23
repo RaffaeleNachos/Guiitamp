@@ -60,6 +60,7 @@ public enum LiveEffectEngine {
     static native void setTremoloEffectMix(int value);
     //Fuzz
     static native void setFuzzEffectValue(float value);
+    static native void setFuzzEffectMix(int value);
     //Distortion
     static native void setDistortionThreshold(long value);
 

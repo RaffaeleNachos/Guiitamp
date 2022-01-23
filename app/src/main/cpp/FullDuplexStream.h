@@ -54,11 +54,12 @@ public:
     bool tremolo = false;
     void setTremoloDuration(int16_t duration){
         tremoloDuration_ms = duration;
-        resetTremolo();
+        simpleTremolo->updateDuration(tremoloDuration_ms);
+        //resetTremolo();
     }
     void setTremoloEffectMix(u_int8_t percent){
         depthPercent = percent;
-        resetTremolo();
+        //resetTremolo();
     }
 
     void resetTremolo(){
@@ -73,13 +74,18 @@ public:
     bool fuzz = false;
     void setFuzzEffectValue(float value){
         fuzzEffectValue = value;
-        resetFuzz();
+        //resetFuzz();
+    }
+    void setFuzzEffectMix(int16_t value){
+        maxOut = value;
+        //resetFuzz();
     }
     void resetFuzz(){
-        simpleFuzz = new audio_tools::Fuzz(fuzzEffectValue);
+        simpleFuzz = new audio_tools::Fuzz(fuzzEffectValue, maxOut);
     }
+    u_int16_t maxOut=500;
     float fuzzEffectValue = 5.0;
-    audio_tools::Fuzz *simpleFuzz = new audio_tools::Fuzz(fuzzEffectValue);
+    audio_tools::Fuzz *simpleFuzz = new audio_tools::Fuzz(fuzzEffectValue, maxOut);
 
     //DISTORTION
     bool distortion = false;
