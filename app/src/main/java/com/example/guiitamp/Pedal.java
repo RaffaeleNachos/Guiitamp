@@ -3,12 +3,13 @@ package com.example.guiitamp;
 import android.graphics.drawable.Drawable;
 
 import java.util.HashMap;
+import java.util.LinkedHashMap;
 
 import it.beppi.knoblibrary.Knob;
 
 public abstract class Pedal {
 
-    public HashMap<Knob.OnStateChanged, PedalInfo> knobs; // HashMap of type <Knob.Callback,PedalStatesInfo>
+    public LinkedHashMap<Knob.OnStateChanged, PedalInfo> knobs; // HashMap of type <Knob.Callback,PedalStatesInfo>
     private Drawable pedalImg;
     public boolean isActive = false;
 

@@ -3,6 +3,7 @@ package com.example.guiitamp;
 import android.graphics.drawable.Drawable;
 
 import java.util.HashMap;
+import java.util.LinkedHashMap;
 
 import it.beppi.knoblibrary.Knob;
 
@@ -10,7 +11,7 @@ public class Tremolo extends Pedal{
 
     public Tremolo(Drawable pedalImg) {
         super(pedalImg);
-        this.knobs = new HashMap<>();
+        this.knobs = new LinkedHashMap<>();
         knobs.put(new Knob.OnStateChanged() {
             @Override
             public void onState(int state) {

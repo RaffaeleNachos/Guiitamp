@@ -10,9 +10,11 @@ import android.widget.TextView;
 import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.recyclerview.widget.RecyclerView;
 
+import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Iterator;
+import java.util.LinkedHashMap;
 
 import it.beppi.knoblibrary.Knob;
 
@@ -69,17 +71,28 @@ public class PedalAdapter extends RecyclerView.Adapter<PedalAdapter.ViewHolder> 
         // Get element from your dataset at this position and replace the
         // contents of the view with that element
         viewHolder.getImageButton().setBackground(pedalList.get(position).getPedalImg());
-        // Set the led on or off
+        // Set the led on or off (no need to reset because value is always updated)
         ImageView ledImg = viewHolder.itemView.findViewById(R.id.led);
         if (pedalList.get(position).isActive) {
             ledImg.setImageResource(R.drawable.led_on);
         } else {
             ledImg.setImageResource(R.drawable.led_off);
         }
+
+        //reset all knobs and text visibility (needed when recyclerview recycle a viewholder)
+        for (int i : knobIds){
+            Knob knob = (Knob) viewHolder.itemView.findViewById(i);
+            knob.setVisibility(View.GONE);
+        }
+        for (int i : textIds){
+            TextView tv = viewHolder.itemView.findViewById(i);
+            tv.setVisibility(View.GONE);
+        }
+
         // Populate the Knobs for every pedal
         if (pedalList.get(position).knobs != null){
             ConstraintLayout constraintLayout = viewHolder.itemView.findViewById(R.id.pedal_knobs_container);
-            HashMap map = pedalList.get(position).knobs;
+            LinkedHashMap map = pedalList.get(position).knobs; //HashMap has no guarantee to be ordered while using iterator, so use LinkedHashMap
             Iterator it = map.entrySet().iterator();
             int i = 0;
             while (it.hasNext()) {
@@ -91,8 +104,8 @@ public class PedalAdapter extends RecyclerView.Adapter<PedalAdapter.ViewHolder> 
                 knob.setNumberOfStates(infos.numOfStates);
                 knob.setState(infos.initialState, true);
                 TextView tv = viewHolder.itemView.findViewById(textIds[i]);
+                tv.setVisibility(View.VISIBLE);
                 tv.setText(infos.controlName);
-                it.remove();
                 i++;
             }
         }
