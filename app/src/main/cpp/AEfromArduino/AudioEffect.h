@@ -100,17 +100,21 @@ class Distortion : public AudioEffect  {
 
 class Fuzz : public AudioEffect  {
     public:
-        /// Fuzz Constructor: use e.g. effectValue=6.5; maxOut = 300
-        Fuzz(float &fuzzEffectValue, uint16_t &maxOut){
-            p_effect_value = &fuzzEffectValue;
-            max_out = &maxOut;
+        /// Fuzz Constructor: use e.g. effectValue=6.5; effectMix = 300
+        Fuzz(float &fuzzEffectValue, uint16_t &fuzzEffectMix){
+            effectValue = &fuzzEffectValue;
+            effectMix = &fuzzEffectMix;
         }
 
         effect_t process(effect_t input){
             if (!active()) return input;
-            float v = *p_effect_value;
-            int32_t result = clip(v * input) ;
-            return map(result * v, -32768, +32767,- *max_out,  *max_out);
+            int32_t valueWithEffect = clip(*effectValue * input);
+            float effMix = *effectMix / 1000.f;
+            int32_t clearInptMixed = clip (input * (1 - effMix));
+            int32_t valueMixed = clearInptMixed + (valueWithEffect * effMix);
+            float resMap = map(valueMixed, -32768, +32767, -32768, +32767);
+            //float res = clip(resMap);
+            return resMap;
         }
 
         float map(float x, float in_min, float in_max, float out_min, float out_max) {
@@ -118,8 +122,8 @@ class Fuzz : public AudioEffect  {
         }
 
     protected:
-        float *p_effect_value;
-        uint16_t *max_out;
+        float *effectValue;
+        uint16_t *effectMix;
 
 };
 

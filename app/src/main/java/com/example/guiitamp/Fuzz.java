@@ -21,9 +21,9 @@ public class Fuzz extends Pedal{
         knobs.put(new Knob.OnStateChanged() {
             @Override
             public void onState(int state) {
-                LiveEffectEngine.setFuzzEffectMix(((state + 1) * 100));
+                LiveEffectEngine.setFuzzEffectMix((state * 100));
             }
-        }, new PedalInfo(10,5, "EFFECT MIX")); // StockValue: (500)   Range: 100 -> 1000
+        }, new PedalInfo(11,6, "EFFECT MIX")); // StockValue: (500)   Range: 0 -> 1000
     }
 
     @Override

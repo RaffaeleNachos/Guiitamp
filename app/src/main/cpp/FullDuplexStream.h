@@ -77,15 +77,15 @@ public:
         //resetFuzz();
     }
     void setFuzzEffectMix(int16_t value){
-        maxOut = value;
+        effectMix = value;
         //resetFuzz();
     }
     void resetFuzz(){
-        simpleFuzz = new audio_tools::Fuzz(fuzzEffectValue, maxOut);
+        simpleFuzz = new audio_tools::Fuzz(fuzzEffectValue, effectMix);
     }
-    u_int16_t maxOut=500;
+    u_int16_t effectMix=500;
     float fuzzEffectValue = 5.0;
-    audio_tools::Fuzz *simpleFuzz = new audio_tools::Fuzz(fuzzEffectValue, maxOut);
+    audio_tools::Fuzz *simpleFuzz = new audio_tools::Fuzz(fuzzEffectValue, effectMix);
 
     //DISTORTION
     bool distortion = false;
