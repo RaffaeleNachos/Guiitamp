@@ -110,7 +110,7 @@ class Fuzz : public AudioEffect  {
             if (!active()) return input;
             int32_t valueWithEffect = clip(*effectValue * input);
             float effMix = *effectMix / 1000.f;
-            int32_t clearInptMixed = clip (input * (1 - effMix));
+            int32_t clearInptMixed = clip (input * (1.f - effMix));
             int32_t valueMixed = clearInptMixed + (valueWithEffect * effMix);
             float resMap = map(valueMixed, -32768, +32767, -32768, +32767);
             //float res = clip(resMap);

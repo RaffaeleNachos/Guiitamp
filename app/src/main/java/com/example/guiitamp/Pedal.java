@@ -26,12 +26,14 @@ public abstract class Pedal {
     public class PedalInfo {
         public Integer numOfStates;
         public Integer initialState;
+        public Integer actualState;
         public String controlName;
 
         PedalInfo(Integer numOfStates, Integer initialState, String controlName){
             this.initialState = initialState;
             this.numOfStates = numOfStates;
             this.controlName = controlName;
+            this.actualState = initialState;
         }
     }
 

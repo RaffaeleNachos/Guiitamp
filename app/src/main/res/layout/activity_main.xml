@@ -60,11 +60,11 @@
                     android:layout_gravity="center"
                     android:layout_weight="7"
                     android:valueFrom="0.0"
-                    android:valueTo="10.0"
+                    android:valueTo="5.0"
                     app:labelBehavior="gone"
-                    app:trackColor="@color/pedalboard"
                     app:thumbColor="@android:color/darker_gray"
-                    app:trackColorActive="@android:color/darker_gray"/>
+                    app:trackColor="@color/pedalboard"
+                    app:trackColorActive="@android:color/darker_gray" />
 
                 <ImageButton
                     android:id="@+id/togglePower"

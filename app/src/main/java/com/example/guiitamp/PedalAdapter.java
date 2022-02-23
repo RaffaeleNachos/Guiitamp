@@ -102,7 +102,7 @@ public class PedalAdapter extends RecyclerView.Adapter<PedalAdapter.ViewHolder> 
                 knob.setOnStateChanged(pair.getKey());
                 Pedal.PedalInfo infos = pair.getValue();
                 knob.setNumberOfStates(infos.numOfStates);
-                knob.setState(infos.initialState, true);
+                knob.setState(infos.actualState, true);
                 TextView tv = viewHolder.itemView.findViewById(textIds[i]);
                 tv.setVisibility(View.VISIBLE);
                 tv.setText(infos.controlName);
